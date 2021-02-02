@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-        <title>Klinik - Pembelian Obat</title>
+        <title>Klinik - Pencatatan Resep Obat</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -63,34 +63,36 @@
         <div id="content" class="p-4 p-md-5 pt-5">
             <!-- As a heading -->
             <nav class="navbar navbar-success bg-primary">
-                <span class="navbar-brand mb-0 h1 text-light" style="text-align: center;">Transaksi Pembelian Obat</span>
+                <span class="navbar-brand mb-0 h1 text-light" style="text-align: center;">Pencatatan Resep Obat</span>
             </nav><br>
-            <a href="" class="cancel"></a>
-            <h2 class="judul">Pencatatan Resep Obat</h2>
-            <form>
-                <fieldset>
-                <legend>Tambah Data</legend>
-                <p>
-                    <label>Id Dokter </label>
-                    <input type="text" name="id" placeholder="Id Dokter" />
-                </p>
-                <p>
-                    <label>Nomor Transaksi </label>
-                    <input type="text" name="nomor" placeholder="Nomor Transaksi" />
-                </p>
-                <p>
-                    <label>Tanggal </label>
-                    <input type="text" name="tanggal" placeholder="Tanggal" />
-                </p>
-                <p>
-                    <label>Resep </label>
-                    <input type="text" name="resep" placeholder="Resep" />
-                </p>
-                <p>
-                    <input type="submit" name="submit" value="simpan" />
-                </p>
-                </fieldset>
-            </form>
+            <div>
+                <form>
+                    <div class="form-group">
+                        <label for="namakam">Id Dokter
+                            <input type="text" class="form-control" id="namakam" aria-describedby="emailHelp" placeholder="">
+                        </label>
+                        <label for="namakam">Nama Dokter
+                            <input type="text" class="form-control" id="namakam" aria-describedby="emailHelp"placeholder="" readonly="true">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlah">No Transaksi</label><br>  
+                        <input type="text" class="form-control" id="jumlah" aria-describedby="emailHelp" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Tanggal</label><br>  
+                        <input type="date" class="form-control" id="harga" aria-describedby="emailHelp" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="namakam">Id Obat
+                            <input type="text" class="form-control" id="namakam" aria-describedby="emailHelp" placeholder="">
+                        </label>
+                        <label for="namakam">Nama Obat
+                            <input type="text" class="form-control" id="namakam" aria-describedby="emailHelp"placeholder="" readonly="true">
+                        </label>
+                    </div>
+                </form>
+            </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

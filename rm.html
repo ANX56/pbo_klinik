@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-        <title>Klinik - Data Obat</title>
+        <title>Klinik - Data Rekam Medis</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -63,53 +63,49 @@
         <div id="content" class="p-4 p-md-5 pt-5">
             <!-- As a heading -->
             <nav class="navbar navbar-success bg-primary">
-                <span class="navbar-brand mb-0 h1 text-light" style="text-align: center;">Data Obat</span>
-            </nav><br>
+                <span class="navbar-brand mb-0 h1 text-light" style="text-align: center;">Data Rekam Medis</span>
+            </nav>
 
             <table class="table table-hover table-bordered" style="margin-top: 5rem; width: 90%; margin-left: 3rem;">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">ID Obat</th>
-                        <th scope="col">Nama Obat</th>
-                        <th scope="col">Stok</th>
-                        <th scope="col">Satuan</th>
-                        <th scope="col">Kategori</th>
-                        <th scope="col">ID Supplier</th>
+                        <th scope="col">Nomor RM</th>
+                        <th scope="col">Nama Pasien</th>
+                        <th scope="col">Tanggal Pemeriksaan</th>
+                        <th scope="col">Dokter</th>
+                        <th scope="col">Diagnosa</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">OB001</th>
-                        <td>Paracetamol</td>
-                        <td>250</td>
-                        <td>Butir</td>
-                        <td>Obat Bebas Terbatas</td>
-                        <td>SP001</td>
+                        <th scope="row">191417</th>
+                        <td>Andriawan Pratikno</td>
+                        <td>28/01/2021</td>
+                        <td>dr. Rr. Rahayu, Sp.PD, FINASIM</td>
+                        <td>batuk, BB turun, penciuman hilang</td>
                         <td>
                             <button type="button" class="btn btn-primary btn-sm">Edit</button>
                             <button type="button" class="btn btn-danger btn-sm">Delete</button>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">OK001</th>
-                        <td>Asam Mefenamat</td>
-                        <td>150</td>
-                        <td>Butir</td>
-                        <td>Obat Keras</td>
-                        <td>SP002</td>
+                        <th scope="row">120212</th>
+                        <td>Ghifari Aliza</td>
+                        <td>20/01/2021</td>
+                        <td>dr. Ishak Husein</td>
+                        <td>batuk, bersin, diare</td>
                         <td>
                             <button type="button" class="btn btn-primary btn-sm">Edit</button>
                             <button type="button" class="btn btn-danger btn-sm">Delete</button>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">ON001</th>
-                        <td>Fentanyl</td>
-                        <td>50</td>
-                        <td>Butir</td>
-                        <td>Narkotika</td>
-                        <td>SP003</td>
+                        <th scope="row">181202</th>
+                        <td>Diwantara Anugerah</td>
+                        <td>29/12/2020</td>
+                        <td>dr. M. Solichin Basrie, Sp.A</td>
+                        <td>diare, mual, BB turun, pusing</td>
                         <td>
                             <button type="button" class="btn btn-primary btn-sm">Edit</button>
                             <button type="button" class="btn btn-danger btn-sm">Delete</button>
@@ -124,54 +120,37 @@
                 <div class="modal-dialog modal-dialog-scrollable modal-xl" style="width:500%; margin:auto;">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Obat</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rekam Medis</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div>
+                                <img src="images/rs.jpg" alt="" style="width: 360px; margin-left: 20rem;">
                                 <form>
                                     <div class="form-group">
-                                        <label for="namakam">ID Obat</label>
-                                        <input type="text" class="form-control" id="namakam" aria-describedby="emailHelp" placeholder="">
+                                        <label for="username">Nomor RM</label>
+                                        <input type="number" class="form-control" id="username" aria-describedby="inputGroup-sizing-default" placeholder="">
                                     </div>
                                     <div class="form-group">
-                                        <label for="namakam">ID Supplier</label>
-                                        <input type="text" class="form-control" id="namakam" aria-describedby="emailHelp"placeholder="">
+                                        <label for="nama">Tanggal Pemeriksaan</label>
+                                        <input type="text" class="form-control" id="nama" placeholder="">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="namakam">Nama Obat</label>
-                                        <input type="text" class="form-control" id="namakam" aria-describedby="emailHelp"placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="jumlah">Stok</label><br>  
-                                        <input type="number" class="form-control" id="jumlah" aria-describedby="emailHelp" placeholder="">
-                                    </div>
-                                    <div class="dropdown form-group">
-                                        <label for="kategori">Satuan</label><br>
-                                        <button class="btn btn-primary dropdown-toggle" type="button" id="kategori" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Satuan
+                                    <div class="dropdown">
+                                        <label for="level">Dokter</label><br>
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="level" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Dokter
                                         </button>
-                                        <div class="dropdown-menu" id="kategori" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" value="1">Butir</a>
-                                            <a class="dropdown-item" value="2">Kapsul</a>
-                                            <a class="dropdown-item" value="3">Botol</a>
+                                        <div class="dropdown-menu" id="level" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" value="1">DU001 | dr. Ishak Husein</a>
+                                            <a class="dropdown-item" value="2">DA001 | dr. M. Solichin Basrie, Sp.A</a>
+                                            <a class="dropdown-item" value="3">DP001 | dr. Rr. Rahayu, Sp.PD, FINASIM</a>
                                         </div>
-                                    </div>
-                                    <div class="dropdown form-group">
-                                        <label for="kategori">Kategori</label><br>
-                                        <button class="btn btn-primary dropdown-toggle" type="button" id="kategori" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Kategori
-                                        </button>
-                                        <div class="dropdown-menu" id="kategori" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" value="1">Obat Bebas Terbatas</a>
-                                            <a class="dropdown-item" value="2">Obat Keras</a>
-                                            <a class="dropdown-item" value="3">Obat Wajib Apotek</a>
-                                            <a class="dropdown-item" value="4">Narkotika</a>
-                                            <a class="dropdown-item" value="5">Psikotropika</a>
-                                            <a class="dropdown-item" value="6">Obat Herbal</a>
-                                        </div>
+                                    </div><br>
+                                    <div class="form-group">
+                                        <label for="nama">Diagnosa</label>
+                                        <input type="text" class="form-control" id="nama" placeholder="">
                                     </div>
                                 </form>
                             </div>
