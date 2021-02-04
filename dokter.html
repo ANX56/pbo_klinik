@@ -22,11 +22,11 @@
             </div>
             <h1><a href="index.html" class="logo">Klinik</a></h1>
             <ul class="list-unstyled components mb-5">
-                <li class="active">
+                <li>
                     <a href="index.html"><span class="fa fa-home mr-3"></span> Home</a>
                 </li>
                 <li>
-                    <a href="user.html"><span class="fa fa-user mr-3"></span> Data User</a>
+                    <a href="registrasi.html"><span class="fa fa-sticky-note mr-3"></span> Pendaftaran</a>
                 </li>
                 <li>
                     <a href="pasien.html"><span class="fa fa-user mr-3"></span> Data Pasien</a>
@@ -35,6 +35,9 @@
                     <a href="rm.html"><span class="fa fa-sticky-note mr-3"></span> Rekam Medis</a>
                 </li>
                 <li>
+                    <a href="user.html"><span class="fa fa-user mr-3"></span> Data User</a>
+                </li>
+                <li class="active">
                     <a href="dokter.html"><span class="fa fa-user mr-3"></span> Data Dokter</a>
                 </li>
                 <li>
@@ -44,79 +47,92 @@
                     <a href="supplier.html"><span class="fa fa-user mr-3"></span> Data Supplier</a>
                 </li>
                 <li>
+                    <a href="kamar.html"><span class="fa fa-user mr-3"></span> Data Kamar</a>
+                </li>
+                <li>
                     <a href="pembayaran.html"><span class="fa fa-sticky-note mr-3"></span> Pembayaran</a>
                 </li>
                 <li>
-                    <a href="logout.html"><span class="fa fa-paper-plane mr-3"></span> Logout</a>
+                    <a href="login.html"><span class="fa fa-paper-plane mr-3"></span> Logout</a>
                 </li>
             </ul>
         </nav>
+
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
-            <nav class="navbar navbar-success bg-info">
-                <span class="navbar-brand mb-0 h1 text-light" style="text-align: center;">Data Dokter</span>
-            </nav>
-            
-            <table class="table table-striped table-bordered" style="margin-top: 5rem; width: 90%; margin-left: 3rem;">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nama Dokter</th>
-                        <th scope="col">Poliklinik</th>
-                        <th scope="col">Jenis Kelamin</th>
-                        <th scope="col">Tanggal Lahir</th>
-                        <th scope="col">Alamat</th>
-                        <th scope="col">Nomor Telepon</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">DU0001</th>
-                        <td>dr. Ishak Husein</td>
-                        <td>Umum</td>
-                        <td>Laki-Laki</td>
-                        <td>Semarang, 20 Maret 1978</td>
-                        <td>Jl. Kramat Sawah XIV Gg. H. Ayub No.347</td>
-                        <td>081289838847</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">DU0001</th>
-                        <td>dr. M. Solichin Basrie, Sp.A</td>
-                        <td>Anak</td>
-                        <td>Laki-Laki</td>
-                        <td>Jakarta, 13 September 1971</td>
-                        <td>Jl. Sumur Batu Raya No. 14</td>
-                        <td>081599828839</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">DU0001</th>
-                        <td>dr. Rr. Rahayu, Sp.PD, FINASIM</td>
-                        <td>Penyakit dalam</td>
-                        <td>Perempuan</td>
-                        <td>Bandung, 8 Juni 1984</td>
-                        <td>Jl. Kayu Jati V No. 47</td>
-                        <td>085699289989</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div>
+                <nav class="navbar navbar-success bg-primary">
+                    <span class="navbar-brand mb-0 h1 text-light">Data Dokter</span>
+                </nav>
+            </div>
+            <div class="jumbotron bg-transparent" style="padding-bottom: 0rem;">
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#exampleModal">Tambah</button>
+                </div>
+            </div>
+            <div class="jumbotron bg-transparent table-responsive" style="padding-top: 0rem;">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="thead-dark text-center">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nama Dokter</th>
+                            <th scope="col">Poliklinik</th>
+                            <th scope="col">Jenis Kelamin</th>
+                            <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">Nomor Telepon</th>
+                            <th scope="col" width="5%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">DU0001</th>
+                            <td>dr. Ishak Husein</td>
+                            <td>Umum</td>
+                            <td>Laki-Laki</td>
+                            <td>Semarang, 20 Maret 1978</td>
+                            <td>Jl. Kramat Sawah XIV Gg. H. Ayub No.347</td>
+                            <td>081289838847</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm mb-1" style="width: 100%;">Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm" style="width: 100%;">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">DA0001</th>
+                            <td>dr. M. Solichin Basrie, Sp.A</td>
+                            <td>Anak</td>
+                            <td>Laki-Laki</td>
+                            <td>Jakarta, 13 September 1971</td>
+                            <td>Jl. Sumur Batu Raya No. 14</td>
+                            <td>081599828839</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm mb-1" style="width: 100%;">Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm" style="width: 100%;">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">DP0001</th>
+                            <td>dr. Rr. Rahayu, Sp.PD, FINASIM</td>
+                            <td>Penyakit dalam</td>
+                            <td>Perempuan</td>
+                            <td>Bandung, 8 Juni 1984</td>
+                            <td>Jl. Kayu Jati V No. 47</td>
+                            <td>085699289989</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm mb-1" style="width: 100%;">Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm" style="width: 100%;">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+           
 
-            <button type="button" class="btn btn-primary" style="float: right; margin-top: 1rem;" data-toggle="modal" data-target="#exampleModal">Tambah</button>
+            
             
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable modal-xl" style="width:500%; margin:auto;">
+                <div class="modal-dialog modal-dialog-scrollable modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Tambah Data Dokter</h5>
@@ -126,13 +142,17 @@
                         </div>
                         <div class="modal-body">
                             <div>
-                                <img src="images/rs.jpg" alt="" style="width: 360px; margin-left: 20rem;">
+                                <center>
+                                    <img src="images/rs.jpg" alt="" style="width: 300px;">
+                                </center>
+                            </div>
+                            <div class="jumbotron bg-transparent">
                                 <form>
-                                    <div class="form-group">
+                                    <div class="form-group mb-2">
                                         <label for="nama">Nama Dokter</label>
                                         <input type="text" class="form-control" id="nama" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Type your Name Here!">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mb-2">
                                         <label for="poli">Poliklinik</label><br>
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="btnPoli" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             --Poliklinik--
@@ -152,38 +172,41 @@
                                             <button class="dropdown-item" type="button">Mata</button>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mb-2">
                                         <label for="jk">Jenis Kelamin</label><br>
-                                        <button class="btn btn-primary dropdown-toggle" type="button" id="jk" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            --Jenis Kelamin--
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="jk">
-                                            <button class="dropdown-item" type="button" value="L">Laki-Laki</button>
-                                            <button class="dropdown-item" type="button" value="P">Perempuan</button>
+                                        <div class="mb-2">
+                                            <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="radioGender">
+                                            <label class="form-check-label" for="">Laki - Laki</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="radioGender">
+                                            <label class="form-check-label" for="">Perempuan</label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mb-2">
                                         <label for="tgl">Tanggal Lahir</label>
                                         <input type="date" class="form-control" id="tgl" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                     </div>        
-                                    <div class="form-group">
+                                    <div class="form-group mb-2">
                                         <label for="alamat">Alamat</label>
                                         <input type="text" class="form-control" id="alamat" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Type your Address Here!">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mb-2">
                                         <label for="alamat">Alamat</label>
                                         <input type="text" class="form-control" id="alamat" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Type your Address Here!">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mb-2">
                                         <label for="notelp">Nomor Telepon</label>
                                         <input type="number" class="form-control" id="notelp" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Type your Phone Number Here!">
                                     </div>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" style="width: 100px;" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" style="width: 100px;">Submit</button>
                         </div>
                     </div>
                 </div>

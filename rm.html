@@ -1,17 +1,19 @@
 <!doctype html>
 <html lang="en">
-  <head>
-  	<title>Klinik - Data Supplier</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-		
+    <head>
+        <title>Klinik - Data Rekam Medis</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+<body>
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="custom-menu">
@@ -31,7 +33,7 @@
                 <li>
                     <a href="pasien.html"><span class="fa fa-user mr-3"></span> Data Pasien</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="rm.html"><span class="fa fa-sticky-note mr-3"></span> Rekam Medis</a>
                 </li>
                 <li>
@@ -43,7 +45,7 @@
                 <li>
                     <a href="karyawan.html"><span class="fa fa-user mr-3"></span> Data Karyawan</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="supplier.html"><span class="fa fa-user mr-3"></span> Data Supplier</a>
                 </li>
                 <li>
@@ -60,9 +62,10 @@
 
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
+            <!-- As a heading -->
             <div>
                 <nav class="navbar navbar-success bg-primary">
-                    <span class="navbar-brand mb-0 h1 text-light">Data Supplier</span>
+                    <span class="navbar-brand mb-0 h1 text-light">Data Rekam Medis</span>
                 </nav>
             </div>
             <div class="jumbotron bg-transparent" style="padding-bottom: 0rem;">
@@ -71,42 +74,46 @@
                 </div>
             </div>
             <div class="jumbotron bg-transparent table-responsive" style="padding-top: 0rem;">
-                <table class="table table-striped table-hover table-bordered">
+                <table class="table table-bordered table-hover table-striped">
                     <thead class="thead-dark text-center">
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">nama Supplier</th>
-                            <th scope="col">Alamat</th>
-                            <th scope="col">No.Telepon</th>
+                            <th scope="col">No RM</th>
+                            <th scope="col">Nama Pasien</th>
+                            <th scope="col">Tanggal Pemeriksaan</th>
+                            <th scope="col">Dokter</th>
+                            <th scope="col">Diagnosa</th>
                             <th scope="col" width="5%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">SP001</th>
-                            <td>PT.Kimia Farma</td>
-                            <td>Jl. jend Sudirman</td>
-                            <td>02186564684</td>
+                            <th scope="row">191417</th>
+                            <td>Andriawan Pratikno</td>
+                            <td>28/01/2021</td>
+                            <td>dr. Rr. Rahayu, Sp.PD, FINASIM</td>
+                            <td>batuk, BB turun, penciuman hilang</td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm mb-1" style="width: 100%;">Edit</button>
                                 <button type="button" class="btn btn-danger btn-sm" style="width: 100%;">Delete</button>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row">SP002</th>
-                            <td>PT.Nestle</td>
-                            <td>Jl. merdeka</td>
-                            <td>0239457156</td>
+                            <th scope="row">120212</th>
+                            <td>Ghifari Aliza</td>
+                            <td>20/01/2021</td>
+                            <td>dr. Ishak Husein</td>
+                            <td>batuk, bersin, diare</td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm mb-1" style="width: 100%;">Edit</button>
                                 <button type="button" class="btn btn-danger btn-sm" style="width: 100%;">Delete</button>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row">SP003</th>
-                            <td>PT.Unilever</td>
-                            <td>Jl. sumber kenangan</td>
-                            <td>017678156157</td>
+                            <th scope="row">181202</th>
+                            <td>Diwantara Anugerah</td>
+                            <td>29/12/2020</td>
+                            <td>dr. M. Solichin Basrie, Sp.A</td>
+                            <td>diare, mual, BB turun, pusing</td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-sm mb-1" style="width: 100%;">Edit</button>
                                 <button type="button" class="btn btn-danger btn-sm" style="width: 100%;">Delete</button>
@@ -115,12 +122,16 @@
                     </tbody>
                 </table>
             </div>
+
             
+
+            
+
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Supplier</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rekam Medis</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -128,29 +139,40 @@
                         <div class="modal-body">
                             <div>
                                 <center>
-                                    <img src="images/sup.jpg" alt="" style="width: 300px;">
+                                    <img src="images/rs.jpg" alt="" style="width: 300px;">
                                 </center>
                             </div>
                             <div class="jumbotron bg-transparent">
                                 <form>
                                     <div class="form-group mb-2">
-                                        <label for="namasup">Nama Supplier</label>
-                                        <input type="text" class="form-control" id="namasup" aria-describedby="emailHelp" placeholder="">
+                                        <label for="username">Nomor RM</label>
+                                        <input type="number" class="form-control" id="username" aria-describedby="inputGroup-sizing-default" placeholder="">
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="alamat">Alamat</label>
-                                        <input type="password" class="form-control" id="alamatsup" placeholder="">
+                                        <label for="nama">Tanggal Pemeriksaan</label>
+                                        <input type="text" class="form-control" id="nama" placeholder="">
                                     </div>
+                                    <div class="dropdown mb-2">
+                                        <label for="level">Dokter</label><br>
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="level" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Dokter
+                                        </button>
+                                        <div class="dropdown-menu" id="level" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" value="1">DU001 | dr. Ishak Husein</a>
+                                            <a class="dropdown-item" value="2">DA001 | dr. M. Solichin Basrie, Sp.A</a>
+                                            <a class="dropdown-item" value="3">DP001 | dr. Rr. Rahayu, Sp.PD, FINASIM</a>
+                                        </div>
+                                    </div><br>
                                     <div class="form-group mb-2">
-                                        <label for="notelpsup">No Telepon</label>
-                                        <input type="text" class="form-control" id="notelpsup" placeholder="">
-                                    </div>        
+                                        <label for="nama">Diagnosa</label>
+                                        <input type="text" class="form-control" id="nama" placeholder="">
+                                    </div>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" style="width: 100px;" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" style="width: 100px;">Submit</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" style="width: 100px;" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" style="width: 100px;">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -158,9 +180,15 @@
         </div>
     </div>
 
+    
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
-  </body>
+</body>
+
 </html>
