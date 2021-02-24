@@ -31,34 +31,25 @@ public class PasienDAO {
     public ArrayList<pasien> getAllPasien(){
         ArrayList<pasien> lk = new ArrayList<>();
         try{
-            String qSelect = "SELECT * FROM pasien ORDER BY rm";
+            String qSelect = "SELECT * FROM pasien ORDER BY id_pasien";
             pst = con.prepareStatement(qSelect);
             rs = pst.executeQuery();
             while(rs.next()){
                 pasien p = new pasien();
-                p.setRm(rs.getString("rm"));
-                p.setNoidentitas(rs.getString("noidentitas"));
-                p.setNama(rs.getString("nama"));
-                if(rs.getString("jk") != null){                    
-                    if((rs.getString("jk")).equals("L"))
-                        p.setJk("Laki-Laki");
-                    else p.setJk("Perempuan");
-                } else p.setJk("");
-                if(rs.getString("tmplahir") != null){                      
-                    p.setTmplahir(rs.getString("tmplahir"));
-                } else p.setTmplahir("");
-                if(rs.getString("tgllahir") != null){                      
-                    String tgl = sdf.format(rs.getDate("tgllahir"));
-                    p.setTgllahir(tgl);
-                } else p.setTgllahir("");
-                if(rs.getString("alamat") != null){                      
-                    p.setAlamat(rs.getString("alamat"));
-                } else p.setAlamat("");
-                if(rs.getString("nohp") != null){          
-                    p.setNohp(rs.getString("nohp"));
-                } else p.setNohp("");
-                p.setStatus(rs.getString("status"));
-                p.setPekerjaan(rs.getString("pekerjaan"));
+                p.setId_pasien(rs.getString("id_pasien"));
+                p.setNama_pasien(rs.getString("nama_pasien"));
+                p.setTgl_lahir(rs.getString("tgl_lahir"));
+                if(rs.getString("jenis_kelamin") != null){                    
+                    if((rs.getString("jenis_kelamin")).equals("L"))
+                        p.setJenis_kelamin("Laki-Laki");
+                    else p.setJenis_kelamin("Perempuan");
+                } else p.setJenis_kelamin("");
+                p.setNo_ktp(rs.getString("no_ktp"));
+                p.setAlamat(rs.getString("alamat"));
+                p.setNo_hp(rs.getString("no_hp"));
+                p.setGol_darah(rs.getString("gol_darah"));
+                p.setPassword(rs.getString("password"));
+                p.setId_user(rs.getString("id_user"));
                 lk.add(p);
             }
         }
@@ -68,23 +59,28 @@ public class PasienDAO {
         return lk;
     }
     
-    public pasien getRecordByNoRM(String rm) {
+    public pasien getRecordById(String id) {
         pasien p = new pasien();
-        String query = "SELECT * FROM pasien WHERE rm = ?";
+        String query = "SELECT * FROM pasien WHERE id_pasien = ?";
         try{
             pst = con.prepareStatement(query);
-            pst.setString(1, rm);
+            pst.setString(1, id);
             rs = pst.executeQuery();
             if(rs.next()){
-                p.setNoidentitas(rs.getString("noidentitas"));
-                p.setNama(rs.getString("nama"));
-                p.setJk(rs.getString("jk"));            
-                p.setTmplahir(rs.getString("tmplahir"));          
-                p.setTgllahir(rs.getString("tgllahir"));
+                p.setId_pasien(rs.getString("id_pasien"));
+                p.setNama_pasien(rs.getString("nama_pasien"));
+                p.setTgl_lahir(rs.getString("tgl_lahir"));
+                if(rs.getString("jenis_kelamin") != null){                    
+                    if((rs.getString("jenis_kelamin")).equals("L"))
+                        p.setJenis_kelamin("Laki-Laki");
+                    else p.setJenis_kelamin("Perempuan");
+                } else p.setJenis_kelamin("");
+                p.setNo_ktp(rs.getString("no_ktp"));
                 p.setAlamat(rs.getString("alamat"));
-                p.setNohp(rs.getString("nohp"));
-                p.setStatus(rs.getString("status")); 
-                p.setPekerjaan(rs.getString("pekerjaan")); 
+                p.setNo_hp(rs.getString("no_hp"));
+                p.setGol_darah(rs.getString("gol_darah"));
+                p.setPassword(rs.getString("password"));
+                p.setId_user(rs.getString("id_user"));
             }
         }
         catch(SQLException e){
@@ -93,41 +89,42 @@ public class PasienDAO {
         return p;
     }
     
-    public void insert(pasien a, String page) {
+    public void insert(pasien p, String page) {
         try{
             String query = "";
+            String message="";
             if(page.equals("edit")){
-                query = "UPDATE pasien SET noidentitas=?, nama=?, jk=?, tmplahir=?, tgllahir=?, alamat=?, nohp=?, status=?, pekerjaan=? WHERE rm=?";
+                query = "UPDATE pasien SET nama_pasien=?, tgl_lahir=?, jenis_kelamin=?, no_ktp=?, alamat=?, no_hp=?, gol_darah=?, password=?, id_user=? WHERE id_pasien=?";
+                message = "update";
             }
             else if(page.equals("tambah")){
-                query = "INSERT INTO pasien(noidentitas, nama, jk, tmplahir, tgllahir, alamat, nohp, status, pekerjaan, rm) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO pasien(nama_pasien, tgl_lahir, jenis_kelamin, no_ktp, alamat, no_hp, gol_darah, password, id_user, id_pasien) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                message = "insert";
             }
             pst = con.prepareStatement(query);
-            pst.setString(1, a.getNoidentitas());
-            pst.setString(2, a.getNama());
-            if(a.getJk().equals("")) pst.setString(3, null);
-            else pst.setString(3, a.getJk());
-            pst.setString(4, a.getTmplahir());
-            if(a.getTgllahir().equals("")) pst.setString(5, null);
-            else pst.setString(5, a.getTgllahir());
-            pst.setString(6, a.getAlamat());
-            pst.setString(7, a.getNohp());
-            pst.setString(8, a.getStatus());
-            pst.setString(9, a.getPekerjaan());
-            pst.setString(10, a.getRm());
+            pst.setString(1, p.getNama_pasien());
+            pst.setString(2, p.getTgl_lahir());
+            pst.setString(3, p.getJenis_kelamin());
+            pst.setString(4, p.getNo_ktp());
+            pst.setString(5, p.getAlamat());
+            pst.setString(6, p.getNo_hp());
+            pst.setString(7, p.getGol_darah());
+            pst.setString(8, p.getPassword());
+            pst.setString(9, p.getId_user());
+            pst.setString(10, p.getId_pasien());
             pst.executeUpdate();
-            System.out.println("insert or update success");
+            System.out.println(message + " success");
         }
         catch(SQLException e){
             System.out.println("insert() : " + e.getMessage());
         }
     }
     
-    public void delete(String rm) {
+    public void delete(String id) {
         try{
-            String qDelete = "DELETE FROM pasien WHERE rm=?";
+            String qDelete = "DELETE FROM pasien WHERE id_pasien=?";
             pst = con.prepareStatement(qDelete);
-            pst.setString(1, rm);
+            pst.setString(1, id);
             pst.executeUpdate();
             System.out.println("delete success");
         }
@@ -140,18 +137,18 @@ public class PasienDAO {
         PasienDAO ad = new PasienDAO();
         System.out.println(ad.getAllPasien());
         pasien a = new pasien();
-//        a.setRm("191417");
-//        a.setNoidentitas("3175081105031002");
-//        a.setNama("Athallah Rizaldi");   
-//        a.setJk("L");         
-//        a.setTmplahir("Jakarta");          
-//        a.setTgllahir("2003-05-11");
-//        a.setAlamat("Jl. Hias No. 35");
-//        a.setNohp("085691645955");
-//        a.setStatus("belum");
-//        a.setPekerjaan("Pelajar");
+        a.setId_pasien("P001");
+        a.setNama_pasien("Athallah Rizaldi");
+        a.setTgl_lahir("2003-05-11");   
+        a.setJenis_kelamin("L");         
+        a.setNo_ktp("3175081105031002");          
+        a.setAlamat("Jl. Hias No. 35");
+        a.setNo_hp("085691645955");
+        a.setGol_darah("O");
+        a.setPassword("atha1234");
+        a.setId_user("UP001");
 //        ad.insert(a, "tambah");
-//        ad.insert(a, "edit");
-//        ad.delete("191417");
+        ad.insert(a, "edit");
+//        ad.delete("P001");
     }
 }

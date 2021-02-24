@@ -35,26 +35,24 @@ public class KaryawanDAO {
             pst = con.prepareStatement(qSelect);
             rs = pst.executeQuery();
             while(rs.next()){
-                karyawan p = new karyawan();
-                p.setId(rs.getString("id_karyawan"));
-                p.setNama(rs.getString("nama"));
-                p.setBagian(rs.getString("bagian"));
+                karyawan k = new karyawan();
+                k.setId_karyawan(rs.getString("id_karyawan"));
+                k.setNama_karyawan(rs.getString("nama_karyawan"));
+                k.setTgl_lahir(rs.getString("tgl_lahir"));
+                k.setBidang_pekerjaan(rs.getString("bidang_pekerjaan"));
                 if(rs.getString("jenis_kelamin") != null){                    
                     if((rs.getString("jenis_kelamin")).equals("L"))
-                        p.setJk("Laki-Laki");
-                    else p.setJk("Perempuan");
-                } else p.setJk("");
-                if(rs.getString("tgl_lahir") != null){                      
-                    String tgl = sdf.format(rs.getDate("tgl_lahir"));
-                    p.setTgllahir(tgl);
-                } else p.setTgllahir("");
-                if(rs.getString("alamat") != null){                      
-                    p.setAlamat(rs.getString("alamat"));
-                } else p.setAlamat("");
-                if(rs.getString("nohp") != null){          
-                    p.setNohp(rs.getString("nohp"));
-                } else p.setNohp("");
-                lk.add(p);
+                        k.setJenis_kelamin("Laki-Laki");
+                    else k.setJenis_kelamin("Perempuan");
+                } else k.setJenis_kelamin("");
+                k.setAlamat(rs.getString("alamat"));
+                k.setNo_hp(rs.getString("no_hp"));
+                k.setNo_ktp(rs.getString("no_ktp"));
+                k.setEmail(rs.getString("email"));
+                k.setNpwp(rs.getString("npwp"));
+                k.setWaktu(rs.getString("waktu"));
+                k.setId_user(rs.getString("id_user"));
+                lk.add(k);
             }
         }
         catch(SQLException e){
@@ -63,50 +61,65 @@ public class KaryawanDAO {
         return lk;
     }
     
-    public karyawan getRecordByNoRM(String nik) {
+    public karyawan getRecordById(String id) {
         karyawan k = new karyawan();
         String query = "SELECT * FROM karyawan WHERE id_karyawan = ?";
         try{
             pst = con.prepareStatement(query);
-            pst.setString(1, nik);
+            pst.setString(1, id);
             rs = pst.executeQuery();
             if(rs.next()){
-                k.setId(rs.getString("id_karyawan"));
-                k.setNama(rs.getString("nama"));    
-                k.setBagian(rs.getString("bagian"));  
-                k.setJk(rs.getString("jenis_kelamin"));        
-                k.setTgllahir(rs.getString("tgllahir"));
+                k.setId_karyawan(rs.getString("id_karyawan"));
+                k.setNama_karyawan(rs.getString("nama_karyawan"));
+                k.setTgl_lahir(rs.getString("tgl_lahir"));
+                k.setBidang_pekerjaan(rs.getString("bidang_pekerjaan"));
+                if(rs.getString("jenis_kelamin") != null){                    
+                    if((rs.getString("jenis_kelamin")).equals("L"))
+                        k.setJenis_kelamin("Laki-Laki");
+                    else k.setJenis_kelamin("Perempuan");
+                } else k.setJenis_kelamin("");
                 k.setAlamat(rs.getString("alamat"));
-                k.setNohp(rs.getString("nohp"));
+                k.setNo_hp(rs.getString("no_hp"));
+                k.setNo_ktp(rs.getString("no_ktp"));
+                k.setEmail(rs.getString("email"));
+                k.setNpwp(rs.getString("npwp"));
+                k.setWaktu(rs.getString("waktu"));
+                k.setId_user(rs.getString("id_user"));
             }
         }
         catch(SQLException e){
-            System.out.println("getRecordByNoanggota() : " + e.getMessage());
+            System.out.println("getRecordById() : " + e.getMessage());
         }
         return k;
     }
     
-    public void insert(karyawan a, String page) {
+    public void insert(karyawan k, String page) {
         try{
             String query = "";
+            String message="";
             if(page.equals("edit")){
-                query = "UPDATE karyawan SET nama=?, bagian=?, jenis_kelamin=?, tgl_lahir=?, alamat=?, nohp=? WHERE id_karyawan=?";
+                query = "UPDATE karyawan SET nama_karyawan=?, tgl_lahir=?, bidang_pekerjaan=?, jenis_kelamin=?, alamat=?, nohp=?, no_ktp=?, email=?, npwp=?, waktu=?, id_user=? WHERE id_karyawan=?";
+                message="update";
             }
             else if(page.equals("tambah")){
-                query = "INSERT INTO karyawan(nama, bagian, jenis_kelamin, tgl_lahir, alamat, nohp, id_karyawan) VALUES (?,?,?,?,?,?,?)";
+                query = "INSERT INTO karyawan(nama_karyawan, tgl_lahir, bidang_pekerjaan, jenis_kelamin, alamat, nohp, no_ktp, email, npwp, waktu, id_user, id_karyawan) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                message="insert";
             }
             pst = con.prepareStatement(query);
-            pst.setString(1, a.getNama());
-            pst.setString(2, a.getBagian());
-            if(a.getJk().equals("")) pst.setString(4, null);
-                else pst.setString(3, a.getJk());
-            if(a.getTgllahir().equals("")) pst.setString(4, null);
-                else pst.setString(4, a.getTgllahir());
-            pst.setString(5, a.getAlamat());
-            pst.setString(6, a.getNohp());
-            pst.setString(7, a.getId());
+            pst.setString(1, k.getNama_karyawan());
+            pst.setString(2, k.getTgl_lahir());
+            pst.setString(3, k.getBidang_pekerjaan());
+            pst.setString(4, k.getJenis_kelamin());
+            pst.setString(5, k.getAlamat());
+            pst.setString(6, k.getNo_hp());
+            pst.setString(7, k.getNo_ktp());
+            pst.setString(8, k.getEmail());
+            pst.setString(9, k.getNpwp());
+            pst.setString(10, k.getWaktu());
+            pst.setString(11, k.getId_user());
+            pst.setString(12, k.getId_karyawan());
             pst.executeUpdate();
-            System.out.println("insert or update success");
+            System.out.println(message + " success");
         }
         catch(SQLException e){
             System.out.println("insert() : " + e.getMessage());
