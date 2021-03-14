@@ -10,7 +10,15 @@ package model;
  * @author atha
  */
 public class karyawan {
-    private String id_karyawan, nama_karyawan, tgl_lahir, bidang_pekerjaan, jenis_kelamin, alamat, no_hp, no_ktp, email, npwp, waktu, id_user;
+    private String id_karyawan, nama_karyawan, tgl_lahir, bidang_pekerjaan, jenis_kelamin, alamat, no_hp, no_ktp, npwp, email, password, waktu, id_user;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getId_karyawan() {
         return id_karyawan;

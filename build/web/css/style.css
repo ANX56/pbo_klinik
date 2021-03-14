@@ -8194,6 +8194,7 @@ h1, h2, h3, h4, h5,
 #sidebar {
   min-width: 250px;
   max-width: 250px;
+  margin-left: -250px;
   background: #00619c;
   color: #ffffff;
   -webkit-transition: all 0.3s;
@@ -8203,7 +8204,7 @@ h1, h2, h3, h4, h5,
   #sidebar .h6 {
     color: #fff; }
   #sidebar.active {
-    margin-left: -250px; }
+    margin-left: 0px; }
     #sidebar.active .custom-menu {
       margin-right: -50px; }
   #sidebar h1 {
@@ -8242,7 +8243,7 @@ h1, h2, h3, h4, h5,
     #sidebar {
       margin-left: -250px; }
       #sidebar.active {
-        margin-left: 0; }
+        margin-left: 0px; }
       #sidebar .custom-menu {
         margin-right: -60px !important;
         top: 10px !important; } }

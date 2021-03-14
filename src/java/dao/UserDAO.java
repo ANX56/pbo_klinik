@@ -37,24 +37,10 @@ public class UserDAO {
             while(rs.next()){
                 user p = new user();
                 p.setId_user(rs.getString("id_user"));
+                p.setUsername(rs.getString("username"));
+                p.setPassword(rs.getString("password"));
                 p.setNama(rs.getString("nama"));
-                p.setLevel(rs.getString("level"));
-                if(rs.getString("role") != null){                    
-                    if((rs.getString("role")).equals("admin"))
-                        p.setLevel("admin");
-                    else if ((rs.getString("role")).equals("dokter"))
-                        p.setLevel("dokter");
-                    else if ((rs.getString("role")).equals("karyawan"))
-                        p.setLevel("karyawan");
-                    else p.setLevel("pasien");
-                } else p.setLevel("");
-
-                if(rs.getString("password") != null){                      
-                    p.setPassword(rs.getString("password"));
-                } else p.setPassword("");
-                if(rs.getString("username") != null){          
-                    p.setUsername(rs.getString("username"));
-                } else p.setUsername("");
+                p.setLevel(rs.getString("role"));
                 lk.add(p);
             }
         }
@@ -64,20 +50,19 @@ public class UserDAO {
         return lk;
     }
     
-    public user getRecordByIdUs(String nik) {
+    public user getRecordById(String id) {
         user k = new user();
         String query = "SELECT * FROM user WHERE id_user = ?";
         try{
             pst = con.prepareStatement(query);
-            pst.setString(1, nik);
+            pst.setString(1, id);
             rs = pst.executeQuery();
             if(rs.next()){
                 k.setId_user(rs.getString("id_user"));
-                k.setNama(rs.getString("nama"));    
-                k.setLevel(rs.getString("role"));  
-                k.setUsername(rs.getString("username"));        
+                k.setNama(rs.getString("nama"));
+                k.setLevel(rs.getString("role"));
+                k.setUsername(rs.getString("username"));
                 k.setPassword(rs.getString("password"));
-                
             }
         }
         catch(SQLException e){
@@ -99,8 +84,7 @@ public class UserDAO {
             pst.setString(1, a.getUsername());
             pst.setString(2, a.getPassword());
             pst.setString(3, a.getNama());
-            if(a.getLevel().equals("")) pst.setString(4, null);
-                else pst.setString(4, a.getLevel());           
+            pst.setString(4, a.getLevel());    
             pst.setString(5, a.getId_user());
             pst.executeUpdate();
             System.out.println("insert or update success");
@@ -110,11 +94,11 @@ public class UserDAO {
         }
     }
     
-    public void delete(int rm) {
+    public void delete(String id) {
         try{
             String qDelete = "DELETE FROM user WHERE id_user=?";
             pst = con.prepareStatement(qDelete);
-            pst.setInt(1, rm);
+            pst.setString(1, id);
             pst.executeUpdate();
             System.out.println("delete success");
         }

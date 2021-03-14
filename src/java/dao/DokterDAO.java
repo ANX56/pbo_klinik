@@ -40,10 +40,10 @@ public class DokterDAO {
                 d.setNama_dokter(rs.getString("nama_dokter"));
                 d.setTgl_lahir(rs.getString("tgl_lahir"));
                 d.setId_poli(rs.getString("id_poli"));
-                if(rs.getString("jenis_kelamin") != null){                    
-                    if((rs.getString("jenis_kelamin")).equals("L"))
-                        d.setJenis_kelamin("Laki-Laki");
-                    else d.setJenis_kelamin("Perempuan");
+                if(rs.getString("jenis_kelamin").equals("L")){                    
+                    d.setJenis_kelamin("Laki-Laki");
+                } else if(rs.getString("jenis_kelamin").equals("P")){                    
+                    d.setJenis_kelamin("Perempuan");
                 }
                 d.setAlamat(rs.getString("alamat"));
                 d.setNo_hp(rs.getString("no_hp"));
@@ -74,10 +74,10 @@ public class DokterDAO {
                 d.setNama_dokter(rs.getString("nama_dokter"));
                 d.setTgl_lahir(rs.getString("tgl_lahir"));
                 d.setId_poli(rs.getString("id_poli"));
-                if(rs.getString("jenis_kelamin") != null){                    
-                    if((rs.getString("jenis_kelamin")).equals("L"))
-                        d.setJenis_kelamin("Laki-Laki");
-                    else d.setJenis_kelamin("Perempuan");
+                if(rs.getString("jenis_kelamin").equals("L")){                    
+                    d.setJenis_kelamin("Laki-Laki");
+                } else if(rs.getString("jenis_kelamin").equals("P")){                    
+                    d.setJenis_kelamin("Perempuan");
                 }
                 d.setAlamat(rs.getString("alamat"));
                 d.setNo_hp(rs.getString("no_hp"));
@@ -145,22 +145,23 @@ public class DokterDAO {
     public static void main(String[] args) {
         DokterDAO ad = new DokterDAO();
         System.out.println(ad.getAllDokter());
-        dokter d = new dokter();
-        d.setId_dokter("DU001");
-        d.setNama_dokter("dr. Ishak Husein");   
-        d.setTgl_lahir("1973-05-21");        
-        d.setId_poli("PU001");      
-        d.setJenis_kelamin("L");
-        d.setAlamat("Komplek Timah Blok DD.5 No.3");
-        d.setNo_hp("083455767783");
-        d.setNpwp("092452943407000");
-        d.setNo_ktp("3128082839384484");
-        d.setEmail("contact.ishakhusein@gmail.com");
-        d.setPassword("ishakhusein");
-        d.setWaktu("2021-02-13 14:21:19");
-        d.setId_user("UD001");
+        System.out.println(ad.getRecordById("DU001"));
+//        dokter d = new dokter();
+//        d.setId_dokter("DU001");
+//        d.setNama_dokter("dr. Ishak Husein");   
+//        d.setTgl_lahir("1973-05-21");        
+//        d.setId_poli("PU001");      
+//        d.setJenis_kelamin("L");
+//        d.setAlamat("Komplek Timah Blok DD.5 No.3");
+//        d.setNo_hp("083455767783");
+//        d.setNpwp("092452943407000");
+//        d.setNo_ktp("3128082839384484");
+//        d.setEmail("contact.ishakhusein@gmail.com");
+//        d.setPassword("ishakhusein");
+//        d.setWaktu("2021-02-13 14:21:19");
+//        d.setId_user("UD001");
 //        ad.insert(d, "tambah");
-        ad.insert(d, "edit");
+//        ad.insert(d, "edit");
 //        ad.delete("DU001");
     }
 }

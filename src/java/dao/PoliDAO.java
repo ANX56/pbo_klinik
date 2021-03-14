@@ -1,3 +1,5 @@
+package dao;
+
 
 import connection.koneksi;
 import dao.ObatDAO;
@@ -49,7 +51,7 @@ public class PoliDAO {
         return lk;
     }
     
-    public poli getRecordByNoRM(String id) {
+    public poli getRecordById(String id) {
         poli p = new poli();
         String query = "SELECT * FROM poli WHERE id_poli = ?";
         try{

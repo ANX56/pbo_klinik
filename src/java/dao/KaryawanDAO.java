@@ -39,17 +39,23 @@ public class KaryawanDAO {
                 k.setId_karyawan(rs.getString("id_karyawan"));
                 k.setNama_karyawan(rs.getString("nama_karyawan"));
                 k.setTgl_lahir(rs.getString("tgl_lahir"));
-                k.setBidang_pekerjaan(rs.getString("bidang_pekerjaan"));
-                if(rs.getString("jenis_kelamin") != null){                    
-                    if((rs.getString("jenis_kelamin")).equals("L"))
-                        k.setJenis_kelamin("Laki-Laki");
-                    else k.setJenis_kelamin("Perempuan");
-                } else k.setJenis_kelamin("");
+                k.setBidang_pekerjaan(rs.getString("bidang_pekerjaan"));                
+                if((rs.getString("bidang_pekerjaan")).equals("administrasi"))
+                    k.setBidang_pekerjaan("Administrasi");
+                else if((rs.getString("bidang_pekerjaan")).equals("suster"))
+                    k.setBidang_pekerjaan("Suster");
+                else if((rs.getString("bidang_pekerjaan")).equals("rm"))
+                    k.setBidang_pekerjaan("Rekam Medis");
+                else k.setBidang_pekerjaan("Apoteker");     
+                if((rs.getString("jenis_kelamin")).equals("L"))
+                    k.setJenis_kelamin("Laki-Laki");
+                else k.setJenis_kelamin("Perempuan");
                 k.setAlamat(rs.getString("alamat"));
                 k.setNo_hp(rs.getString("no_hp"));
                 k.setNo_ktp(rs.getString("no_ktp"));
-                k.setEmail(rs.getString("email"));
                 k.setNpwp(rs.getString("npwp"));
+                k.setEmail(rs.getString("email"));
+                k.setPassword(rs.getString("password"));
                 k.setWaktu(rs.getString("waktu"));
                 k.setId_user(rs.getString("id_user"));
                 lk.add(k);
@@ -72,7 +78,13 @@ public class KaryawanDAO {
                 k.setId_karyawan(rs.getString("id_karyawan"));
                 k.setNama_karyawan(rs.getString("nama_karyawan"));
                 k.setTgl_lahir(rs.getString("tgl_lahir"));
-                k.setBidang_pekerjaan(rs.getString("bidang_pekerjaan"));
+                if((rs.getString("bidang_pekerjaan")).equals("administrasi"))
+                    k.setBidang_pekerjaan("Administrasi");
+                else if((rs.getString("bidang_pekerjaan")).equals("suster"))
+                    k.setBidang_pekerjaan("Suster");
+                else if((rs.getString("bidang_pekerjaan")).equals("rm"))
+                    k.setBidang_pekerjaan("Rekam Medis");
+                else k.setBidang_pekerjaan("Apoteker");    
                 if(rs.getString("jenis_kelamin") != null){                    
                     if((rs.getString("jenis_kelamin")).equals("L"))
                         k.setJenis_kelamin("Laki-Laki");
@@ -81,8 +93,9 @@ public class KaryawanDAO {
                 k.setAlamat(rs.getString("alamat"));
                 k.setNo_hp(rs.getString("no_hp"));
                 k.setNo_ktp(rs.getString("no_ktp"));
-                k.setEmail(rs.getString("email"));
                 k.setNpwp(rs.getString("npwp"));
+                k.setEmail(rs.getString("email"));
+                k.setPassword(rs.getString("password"));
                 k.setWaktu(rs.getString("waktu"));
                 k.setId_user(rs.getString("id_user"));
             }
@@ -98,11 +111,11 @@ public class KaryawanDAO {
             String query = "";
             String message="";
             if(page.equals("edit")){
-                query = "UPDATE karyawan SET nama_karyawan=?, tgl_lahir=?, bidang_pekerjaan=?, jenis_kelamin=?, alamat=?, nohp=?, no_ktp=?, email=?, npwp=?, waktu=?, id_user=? WHERE id_karyawan=?";
+                query = "UPDATE karyawan SET nama_karyawan=?, tgl_lahir=?, bidang_pekerjaan=?, jenis_kelamin=?, alamat=?, no_hp=?, no_ktp=?, npwp=?, email=?, password=?, waktu=?, id_user=? WHERE id_karyawan=?";
                 message="update";
             }
             else if(page.equals("tambah")){
-                query = "INSERT INTO karyawan(nama_karyawan, tgl_lahir, bidang_pekerjaan, jenis_kelamin, alamat, nohp, no_ktp, email, npwp, waktu, id_user, id_karyawan) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                query = "INSERT INTO karyawan(nama_karyawan, tgl_lahir, bidang_pekerjaan, jenis_kelamin, alamat, no_hp, no_ktp, npwp, email, password, waktu, id_user, id_karyawan) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 message="insert";
             }
             pst = con.prepareStatement(query);
@@ -113,11 +126,12 @@ public class KaryawanDAO {
             pst.setString(5, k.getAlamat());
             pst.setString(6, k.getNo_hp());
             pst.setString(7, k.getNo_ktp());
-            pst.setString(8, k.getEmail());
-            pst.setString(9, k.getNpwp());
-            pst.setString(10, k.getWaktu());
-            pst.setString(11, k.getId_user());
-            pst.setString(12, k.getId_karyawan());
+            pst.setString(8, k.getNpwp());
+            pst.setString(9, k.getEmail());
+            pst.setString(10, k.getPassword());
+            pst.setString(11, k.getWaktu());
+            pst.setString(12, k.getId_user());
+            pst.setString(13, k.getId_karyawan());
             pst.executeUpdate();
             System.out.println(message + " success");
         }
@@ -143,13 +157,19 @@ public class KaryawanDAO {
         KaryawanDAO ad = new KaryawanDAO();
         System.out.println(ad.getAllKaryawan());
         karyawan a = new karyawan();
-//        a.setId("K0002");
-//        a.setNama("M. Alvif Arfin");           
-//        a.setBagian("Apoteker");   
-//        a.setJk("L");        
-//        a.setTgllahir("2003-07-18");
-//        a.setAlamat("Warung Pak Jusuf");
-//        a.setNohp("083455767783");
+//        a.setId_karyawan("KR001");
+//        a.setNama_karyawan("Tegar Rizki Harnandi");
+//        a.setTgl_lahir("1993-04-24");
+//        a.setBidang_pekerjaan("rm");
+//        a.setJenis_kelamin("L");
+//        a.setAlamat("Jl. Hias No. 35");
+//        a.setNo_hp("083455767783");
+//        a.setNo_ktp("3175872837467623");
+//        a.setNpwp("0012348958263");
+//        a.setEmail("tegarrizki@gmail.com");
+//        a.setPassword("tegar123");
+//        a.setWaktu("2021-03-14 22:04:14");
+//        a.setId_user("UK002");
 //        ad.insert(a, "tambah");
 //        ad.insert(a, "edit");
 //        ad.delete("K0002");

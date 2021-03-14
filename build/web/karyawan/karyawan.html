@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+    <head>
+  	<title>Klinik - Data Karyawan</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/style.css">
+
+    <!--    <script src="../js/jquery.min.js"></script>
+        <script src="../js/popper.js"></script>
+        <script src="../js/bootstrap.min.js"></script> 
+        <script src="../js/main.js"></script>-->
+        <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src ="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src ="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src ="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
+        <script type="text/javascript" src="karyawan.js"></script>
+    </head>
+    <body>		
+        <div class="wrapper d-flex align-items-stretch">
+            <nav id="sidebar">
+                    <div class="custom-menu">
+                        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                            <i class="fa fa-bars"></i>
+                            <span class="sr-only">Toggle Menu</span>
+                        </button>
+                    </div>
+                    <div class="p-4 pt-5">
+                        <h1><a href="index.html" class="logo">KLINIK</a></h1>
+                        <ul class="list-unstyled components mb-5">
+                            <li>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="active">
+                                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Data</a>
+                                <ul class="collapse list-unstyled" id="homeSubmenu">
+                                    <li>
+                                        <a href="pasien.html">Data Pasien</a>
+                                    </li>
+                                    <li>
+                                        <a href="user.html">Data User</a>
+                                    </li>
+                                    <li>
+                                        <a href="dokter.html">Data Dokter</a>
+                                    </li>
+                                    <li>
+                                        <a href="karyawan.html">Data Karyawan</a>
+                                    </li>
+                                    <li>
+                                        <a href="supplier.html">Data Supplier</a>
+                                    </li>
+                                    <li>
+                                        <a href="kamar.html">Data Kamar</a>
+                                    </li>
+                                    <li>
+                                        <a href="layanan.html">Data Layanan</a>
+                                    </li>
+                                    <li>
+                                        <a href="obat.html">Data Obat</a>
+                                    </li>
+                                    <li>
+                                        <a href="supplier.html">Data Supplier</a>
+                                    </li>
+                                    <li>
+                                        <a href="poli.html">Data Poli</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="rm.html">Rekam Medis</a>
+                            </li>
+                            <li>
+                                <a href="pendaftaran.html">Pendaftaran</a>
+                            </li>
+                            <li>
+                                <a href="registrasi.html">Registrasi</a>
+                            </li>
+                            <li>
+                                <a href="resep.html">Resep</a>
+                            </li>
+                            <li>
+                                <a href="login.html">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+            <!-- Page Content  -->
+            <div id="content" class="p-4 p-md-5 pt-5">
+                <div>
+                    <nav class="navbar navbar-success bg-primary">
+                        <span class="navbar-brand mb-0 h1 text-light" style="text-align: center;">Data Karyawan</span>
+                    </nav>
+                </div>
+                <div class="jumbotron bg-transparent" style="padding-bottom: 0rem;">
+                    <div class="text-right">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="btnAdd">Tambah</button>
+                    </div>
+                </div>
+
+                <div class="jumbotron bg-transparent table-responsive" style="padding-top: 0rem;">
+                    <table class="table table-bordered table-striped table-hover" id="tableKaryawan">
+                        <thead class="thead-dark text-center">
+                            <th scope="col">ID Karyawan</th>
+                            <th scope="col">Nama Karyawan</th>
+                            <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Bidang Pekerjaan</th>
+                            <th scope="col">Jenis Kelamin</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">No Telepon</th>
+                            <th scope="col">No KTP</th>
+                            <th scope="col">NPWP</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Waktu</th>
+                            <th scope="col">ID User</th>
+                            <th scope="col" width="5%">Action</th>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot class="thead-dark text-center">
+                            <th scope="col">ID Karyawan</th>
+                            <th scope="col">Nama Karyawan</th>
+                            <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Bidang Pekerjaan</th>
+                            <th scope="col">Jenis Kelamin</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">No Telepon</th>
+                            <th scope="col">No KTP</th>
+                            <th scope="col">NPWP</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Waktu</th>
+                            <th scope="col">ID User</th>
+                            <th scope="col" width="5%">Action</th>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="modal" id="myModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h5 class="modal-title text-light" id="title1">Tambah Data Karyawan</h5>
+                                <h5 class="modal-title text-light" id="title2">Edit Data Karyawan</h5>
+                                <button type="button" class="close" id="btnClose" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <center>
+                                        <img src="../images/rs.jpg" alt="" style="width: 300px;">
+                                    </center>
+                                </div>
+                                <div class="jumbotron bg-transparent">
+                                    <form>
+                                        <div class="form-group mb-2">
+                                            <label for="id_karyawan">ID Karyawan</label>
+                                            <input type="text" class="form-control" id="id_karyawan">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="nama_karyawan">Nama Karyawan</label>
+                                            <input type="text" class="form-control" id="nama_karyawan">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="tgl_lahir">Tanggal Lahir</label>
+                                            <input type="date" class="form-control" id="tgl_lahir">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="bidang_pekerjaan">Bidang Pekerjaan</label>                                
+                                            <div class="input-group mb-2">
+                                                <select id="bidang_pekerjaan" class="form-control">
+                                                    <option value="">--Pilih--</option>
+                                                    <option value="administrasi">Administrasi</option>
+                                                    <option value="suster">Suster</option>
+                                                    <option value="rm">Rekam Medis</option>
+                                                    <option value="apoteker">Apoteker</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="jenis_kelamin">Jenis Kelamin</label>                                
+                                            <div class="input-group mb-2">
+                                                <select id="jenis_kelamin" class="form-control">
+                                                    <option value="">--Pilih--</option>
+                                                    <option value="L">Laki-Laki</option>
+                                                    <option value="P">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="alamat">Alamat</label>
+                                            <input type="text" class="form-control" id="alamat">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="no_hp">Nomor Telepon</label>
+                                            <input type="text" class="form-control" id="no_hp">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="no_ktp">Nomor KTP</label>
+                                            <input type="number" class="form-control" id="no_ktp">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="npwp">NPWP</label>
+                                            <input type="number" class="form-control" id="npwp">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="password">Password</label>
+                                            <input type="text" class="form-control" id="password">
+                                        </div>                                  
+                                        <div class="form-group mb-2">
+                                            <label for="waktu">Waktu</label>
+                                            <input type="datetime-local" class="form-control" id="waktu" autocomplete="off">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="id_user">ID User</label>
+                                            <div class="input-group col-12">
+                                                <input type="text" class="form-control" id="id_user">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-primary" id="btn-lookup-user">Lookup</button>
+                                                </div>
+                                                <input type="text" class="form-control" style="margin-left:5rem" readonly="true" id="nama_user">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" style="width: 100px;" id="btnCancel" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary" style="width: 100px;" id="btnSave">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Lookup User -->
+        <div class="modal" id="modalLookupUser">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Data User</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table" id="tabelLookupUser">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Id User</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" style="width: 100px;" id="btnCancel" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
