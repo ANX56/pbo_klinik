@@ -1,8 +1,10 @@
+<!doctype html>
 <html lang="en">
     <head>
-        <title>Klinik - Data Dokter</title>
+        <title>Klinik - Data Rekam Medis</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
@@ -18,7 +20,7 @@
         <script src ="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src ="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src ="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
-        <script type="text/javascript" src="dokter.js"></script>
+        <script type="text/javascript" src="rm.js"></script>
     </head>
     <body>
         <div class="wrapper d-flex align-items-stretch">
@@ -91,7 +93,7 @@
             <div id="content" class="container container-fluid p-md-5">
                 <div>
                     <nav class="navbar navbar-success bg-primary">
-                        <span class="navbar-brand mb-0 h1 text-light">Data Dokter</span>
+                        <span class="navbar-brand mb-0 h1 text-light">Data Rekam Medis</span>
                     </nav>
                 </div>
 
@@ -102,38 +104,34 @@
                 </div>
 
                 <div class="jumbotron bg-transparent table-responsive" style="padding-top: 0rem;">
-                    <table class="table table-striped table-hover table-bordered" id="tabelDokter">
+                    <table class="table table-striped table-hover table-bordered" id="tabelRM">
                         <thead class="thead-dark text-center">
-                            <th scope="col">ID Dokter</th>
-                            <th scope="col">Nama Dokter</th>
-                            <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Nomor RM</th>
+                            <th scope="col">ID Pasien</th>
+                            <th scope="col">Tanggal Daftar</th>
                             <th scope="col">ID Poli</th>
-                            <th scope="col">Jenis Kelamin</th>
-                            <th scope="col">Alamat</th>
-                            <th scope="col">Nomor Telepon</th>
-                            <th scope="col">NPWP</th>
-                            <th scope="col">No KTP</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Password</th>
+                            <th scope="col">ID Doktor</th>
+                            <th scope="col">Berat</th>
+                            <th scope="col">Tinggi</th>
+                            <th scope="col">Tensi</th>
+                            <th scope="col">Diagnosa</th>
+                            <th scope="col">ID Resep</th>
                             <th scope="col">Waktu</th>
-                            <th scope="col">User ID</th>
                             <th scope="col" width="5%">Action</th>
                         </thead>
                         <tbody></tbody>
                         <tfoot class="thead-dark text-center">
-                            <th scope="col">ID Dokter</th>
-                            <th scope="col">Nama Dokter</th>
-                            <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Nomor RM</th>
+                            <th scope="col">ID Pasien</th>
+                            <th scope="col">Tanggal Daftar</th>
                             <th scope="col">ID Poli</th>
-                            <th scope="col">Jenis Kelamin</th>
-                            <th scope="col">Alamat</th>
-                            <th scope="col">Nomor Telepon</th>
-                            <th scope="col">NPWP</th>
-                            <th scope="col">No KTP</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Password</th>
+                            <th scope="col">ID Doktor</th>
+                            <th scope="col">Berat</th>
+                            <th scope="col">Tinggi</th>
+                            <th scope="col">Tensi</th>
+                            <th scope="col">Diagnosa</th>
+                            <th scope="col">ID Resep</th>
                             <th scope="col">Waktu</th>
-                            <th scope="col">User ID</th>
                             <th scope="col" width="5%">Action</th>
                         </tfoot>
                     </table>
@@ -143,8 +141,8 @@
                     <div class="modal-dialog modal-dialog-scrollable modal-xl">
                         <div class="modal-content">
                             <div class="modal-header bg-primary">
-                                <h5 class="modal-title text-light" id="title1">Tambah Data Dokter</h5>
-                                <h5 class="modal-title text-light" id="title2">Edit Data Dokter</h5>
+                                <h5 class="modal-title text-light" id="title1">Tambah Data Rekam Medis</h5>
+                                <h5 class="modal-title text-light" id="title2">Edit Data Rekam Medis</h5>
                                 <button type="button" class="close" id="btnClose" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -158,21 +156,26 @@
                                 <div class="jumbotron bg-transparent">
                                     <form>
                                         <div class="form-group mb-2">
-                                              <label for="id_dokter">ID Dokter</label>
-                                              <input type="text" class="form-control" id="id_dokter">
+                                            <label for="nomor_rm">Nomor RM</label>
+                                            <div class="input-group col-12">
+                                              <input type="text" class="form-control" id="nomor_rm">
+                                            </div>
+                                        </div>                                        
+                                        <div class="form-group mb-2">
+                                            <label for="id_pasien">ID Pasien</label>
+                                            <div class="input-group col-12">
+                                                <input type="text" class="form-control" id="id_pasien">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-primary" id="btn-lookup-pasien">Lookup</button>
+                                                </div>
+                                                <input type="text" class="form-control" style="margin-left:5rem;" readonly="true" id="nama_pasien">
+                                            </div>
                                         </div>
                                         <div class="form-group mb-2">
-                                              <label for="nama_dokter">Nama Dokter</label>
-                                              <input type="text" class="form-control" id="nama_dokter">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                              <label for="tgl_lahir">Tanggal Lahir</label>
-                                              <input type="text" class="form-control" onBlur="ValidateDOB()" id="tgl_lahir">
-                                              <span class="badge badge-danger" id="lblError"></span>                                
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <label for="alamat">Alamat</label>
-                                            <input type="text" class="form-control" id="alamat">
+                                            <label for="tgl_daftar">Tanggal Daftar</label>
+                                            <div class="input-group col-12">
+                                                <input type="date" class="form-control" id="tgl_daftar">   
+                                            </div>
                                         </div>
                                         <div class="form-group mb-2">
                                             <label for="id_poli">ID Poli</label>
@@ -185,47 +188,53 @@
                                             </div>
                                         </div>
                                         <div class="form-group mb-2">
-                                            <label for="jenis_kelamin">Jenis Kelamin</label>                                
-                                            <div class="input-group mb-2">
-                                                <select id="jenis_kelamin" class="form-control">
-                                                    <option value="">--Pilih--</option>
-                                                    <option value="L">Laki-Laki</option>
-                                                    <option value="P">Perempuan</option>
-                                                </select>
+                                            <label for="id_dokter">ID Dokter</label>
+                                            <div class="input-group col-12">
+                                                <input type="text" class="form-control" id="id_dokter">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-primary" id="btn-lookup-dokter">Lookup</button>
+                                                </div>
+                                                <input type="text" class="form-control" style="margin-left:5rem;" readonly="true" id="nama_dokter">
                                             </div>
                                         </div>
                                         <div class="form-group mb-2">
-                                            <label for="no_hp">Nomor Telepon</label>
-                                            <input type="text" class="form-control" id="no_hp">
+                                            <label for="berat">Berat</label>
+                                            <div class="input-group col-12">
+                                                <input type="number" class="form-control" id="berat">
+                                            </div>
                                         </div>
                                         <div class="form-group mb-2">
-                                            <label for="npwp">NPWP</label>
-                                            <input type="number" class="form-control" id="npwp">
+                                            <label for="tinggi">Tinggi</label>
+                                            <div class="input-group col-12">
+                                                <input type="number" class="form-control" id="tinggi">
+                                            </div>
                                         </div>
                                         <div class="form-group mb-2">
-                                            <label for="no_ktp">Nomor KTP</label>
-                                            <input type="number" class="form-control" id="no_ktp">
+                                            <label for="tensi">Tensi</label>
+                                            <div class="input-group col-12">
+                                                <input type="text" class="form-control" id="tensi">
+                                            </div>
                                         </div>
                                         <div class="form-group mb-2">
-                                            <label for="email">Email</label>
-                                            <input type="email" class="form-control" id="email">
+                                            <label for="diagnosa">Diagnosa</label>
+                                            <div class="input-group col-12">
+                                                <input type="text" class="form-control" id="diagnosa">
+                                            </div>
                                         </div>
                                         <div class="form-group mb-2">
-                                            <label for="password">Password</label>
-                                            <input type="text" class="form-control" id="password">
+                                            <label for="id_resep">ID Resep</label>
+                                            <div class="input-group col-12">
+                                                <input type="text" class="form-control" id="id_resep">
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-primary" id="btn-lookup-resep">Lookup</button>
+                                                </div>
+                                                <input type="text" class="form-control" style="margin-left:5rem;" readonly="true" id="id_obat">
+                                            </div>
                                         </div>
                                         <div class="form-group mb-2">
                                             <label for="waktu">Waktu</label>
-                                            <input type="datetime-local" class="form-control" id="waktu" autocomplete="off">
-                                        </div>
-                                        <div class="form-group mb-2">
-                                            <label for="id_user">ID User</label>
                                             <div class="input-group col-12">
-                                                <input type="text" class="form-control" id="id_user">
-                                                <div class="input-group-append">
-                                                    <button type="button" class="btn btn-primary" id="btn-lookup-user">Lookup</button>
-                                                </div>
-                                                <input type="text" class="form-control" style="margin-left:5rem" readonly="true" id="nama_user">
+                                                <input type="datetime-local" class="form-control" id="waktu">
                                             </div>
                                         </div>
                                     </form>
@@ -236,6 +245,35 @@
                                 <button type="submit" class="btn btn-primary" style="width: 100px;" id="btnSave">Submit</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Lookup Pasien -->
+        <div class="modal" id="modalLookupPasien">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Data Pasien</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table" id="tabelLookupPasien">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Id Pasien</th>
+                                    <th scope="col">Nama Pasien</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" style="width: 100px;" id="btnCancel" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -272,28 +310,60 @@
             </div>
         </div>
 
-        <!-- Modal Lookup User -->
-        <div class="modal" id="modalLookupUser">
+        <!-- Modal Lookup Dokter -->
+        <div class="modal" id="modalLookupDokter">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Data User</h5>
+                        <h5 class="modal-title">Data Dokter</h5>
                         <button type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <table class="table" id="tabelLookupUser">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Id User</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                        <div class="col-12">
+                            <table class="table" id="tabelLookupDokter">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">ID Dokter</th>
+                                        <th scope="col">Nama Dokter</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" style="width: 100px;" id="btnCancel" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Lookup Resep -->
+        <div class="modal" id="modalLookupResep">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Data Resep</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-12">
+                            <table class="table" id="tabelLookupResep">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">ID Resep</th>
+                                        <th scope="col">ID Obat</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" style="width: 100px;" id="btnCancel" data-dismiss="modal">Cancel</button>
@@ -302,37 +372,4 @@
             </div>
         </div>
     </body>
-    <script>
-        function ValidateDOB() {
-            var lblError = document.getElementById("lblError");
-            var dateString = document.getElementById("tgl_lahir").value;
-            var regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
-
-            if (regex.test(dateString)) {
-                var parts = dateString.split("/");
-                var dtDOB = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
-                var dtCurrent = new Date();
-                lblError.innerHTML = "Usia minimal 18 tahun.";
-                if (dtCurrent.getFullYear() - dtDOB.getFullYear() < 18) {
-                    return false;
-                }
-
-                if (dtCurrent.getFullYear() - dtDOB.getFullYear() === 18) {
-                    if (dtCurrent.getMonth() < dtDOB.getMonth()) {
-                        return false;
-                    }
-                    if (dtCurrent.getMonth() === dtDOB.getMonth()) {
-                        if (dtCurrent.getDate() < dtDOB.getDate()) {
-                            return false;
-                        }
-                    }
-                }
-                lblError.innerHTML = "";
-                return true;
-            } else {
-                lblError.innerHTML = "Masukkan tanggal dalam format dd/MM/yyyy.";
-                return false;
-            }
-        }
-    </script>
 </html>

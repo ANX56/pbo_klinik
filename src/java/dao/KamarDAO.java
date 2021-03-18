@@ -33,15 +33,16 @@ public class KamarDAO {
             pst = con.prepareStatement(query);
             rs= pst.executeQuery();
             while(rs.next()){
-            kamar r = new kamar();
-            r.setId_kamar(rs.getString("id_kamar"));
-            r.setNama_kamar(rs.getString("nama_ruang"));
-            r.setNo_kamar(rs.getString("no_ruang"));
-            r.setDeskirpsi(rs.getString("des_kamar"));
-            r.setKapasitas(rs.getInt("kapasitas"));
-            r.setTerisi(rs.getString("terisi"));
-            r.setStatus(rs.getString("status"));
-            
+                kamar r = new kamar();
+                r.setId_kamar(rs.getString("id_kamar"));
+                r.setNama_kamar(rs.getString("nama_ruang"));
+                r.setNo_kamar(rs.getString("no_ruang"));
+                r.setKelas(rs.getString("kelas"));
+                r.setDeskirpsi(rs.getString("des_kamar"));
+                r.setKapasitas(rs.getInt("kapasitas"));
+                r.setTerisi(rs.getString("terisi"));
+                r.setStatus(rs.getString("status"));
+                ls.add(r);
             }
         }
         catch(SQLException e){
@@ -50,7 +51,7 @@ public class KamarDAO {
         return ls;
     }
     
-    public kamar getRecordByIdKamar(String no){
+    public kamar getRecordById(String no){
         kamar k = new kamar();
         String qusup="SELECT * FROM kamar WHERE id_kamar=?";
         try{
@@ -61,11 +62,11 @@ public class KamarDAO {
                 k.setId_kamar(rs.getString("id_kamar"));
                 k.setNama_kamar(rs.getString("nama_ruang"));
                 k.setNo_kamar(rs.getString("no_ruang"));
+                k.setKelas(rs.getString("kelas"));
                 k.setDeskirpsi(rs.getString("des_kamar"));
                 k.setKapasitas(rs.getInt("kapasitas"));
                 k.setTerisi(rs.getString("terisi"));
                 k.setStatus(rs.getString("status"));
-
             }
         }
         catch(SQLException e){
@@ -78,19 +79,20 @@ public class KamarDAO {
         try{
             String query = "";
             if(page.equals("edit")){
-                query = "UPDATE kamar SET nama_ruang=?, no_ruang=?, des_kamar=?, kapasitas=?, terisi=?, status=? WHERE id_kamar=?";
+                query = "UPDATE kamar SET nama_ruang=?, no_ruang=?, kelas=?, des_kamar=?, kapasitas=?, terisi=?, status=? WHERE id_kamar=?";
             }
             else if(page.equals("tambah")){
-                query = "INSERT INTO kamar(nama_ruang, no_ruang, des_kamar, kapasitas, terisi, status, id_kamar) VALUES (?,?,?,?,?,?,?)";
+                query = "INSERT INTO kamar(nama_ruang, no_ruang, kelas, des_kamar, kapasitas, terisi, status, id_kamar) VALUES (?,?,?,?,?,?,?,?)";
             }
             pst = con.prepareStatement(query);
             pst.setString(1, a.getNama_kamar());
-            pst.setString(2, a.getNo_kamar());     
-            pst.setString(3, a.getDeskirpsi());
-            pst.setInt(4, a.getKapasitas());
-            pst.setString(5, a.getTerisi());
-            pst.setString(6, a.getStatus());
-            pst.setString(7, a.getId_kamar());
+            pst.setString(2, a.getNo_kamar());
+            pst.setString(3, a.getKelas());
+            pst.setString(4, a.getDeskirpsi());
+            pst.setInt(5, a.getKapasitas());
+            pst.setString(6, a.getTerisi());
+            pst.setString(7, a.getStatus());
+            pst.setString(8, a.getId_kamar());
             pst.executeUpdate();
             System.out.println("insert or update success");
         }
@@ -99,11 +101,11 @@ public class KamarDAO {
         }
     }
     
-    public void delete(String rm) {
+    public void delete(String id) {
         try{
             String qDelete = "DELETE FROM kamar WHERE id_kamar=?";
             pst = con.prepareStatement(qDelete);
-            pst.setString(1, rm);
+            pst.setString(1, id);
             pst.executeUpdate();
             System.out.println("delete success");
         }

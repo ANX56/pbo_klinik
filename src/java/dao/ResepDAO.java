@@ -117,12 +117,12 @@ public class ResepDAO {
         ResepDAO ad = new ResepDAO();
         System.out.println(ad.getAllResep());
         resep a = new resep();
-        a.setId_resep("RO001");
-        a.setId_obat("OU001");
-        a.setJumlah(12);
-        a.setKeterangan("Obat Umum"); 
-        a.setWaktu("2021-02-21 11:41:48");
-        a.setId_user("UP001");
+//        a.setId_resep("RO001");
+//        a.setId_obat("OU001");
+//        a.setJumlah(12);
+//        a.setKeterangan("Obat Umum"); 
+//        a.setWaktu("2021-02-21 11:41:48");
+//        a.setId_user("UP001");
 //        ad.insert(a, "tambah");
 //        ad.insert(a, "edit");
 //        ad.delete("P001");

@@ -137,18 +137,18 @@ public class PasienDAO {
         PasienDAO ad = new PasienDAO();
         System.out.println(ad.getAllPasien());
         pasien a = new pasien();
-        a.setId_pasien("P001");
-        a.setNama_pasien("Athallah Rizaldi");
-        a.setTgl_lahir("2003-05-11");   
-        a.setJenis_kelamin("L");         
-        a.setNo_ktp("3175081105031002");          
-        a.setAlamat("Jl. Hias No. 35");
-        a.setNo_hp("085691645955");
-        a.setGol_darah("O");
-        a.setPassword("atha1234");
-        a.setId_user("UP001");
+//        a.setId_pasien("P001");
+//        a.setNama_pasien("Athallah Rizaldi");
+//        a.setTgl_lahir("2003-05-11");   
+//        a.setJenis_kelamin("L");         
+//        a.setNo_ktp("3175081105031002");          
+//        a.setAlamat("Jl. Hias No. 35");
+//        a.setNo_hp("085691645955");
+//        a.setGol_darah("O");
+//        a.setPassword("atha1234");
+//        a.setId_user("UP001");
 //        ad.insert(a, "tambah");
-        ad.insert(a, "edit");
+//        ad.insert(a, "edit");
 //        ad.delete("P001");
     }
 }

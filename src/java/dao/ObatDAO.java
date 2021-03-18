@@ -64,12 +64,12 @@ public class ObatDAO {
         return lk;
     }
     
-    public obat getRecordByNoRM(String nik) {
+    public obat getRecordById(String id) {
         obat o = new obat();
         String query = "SELECT * FROM obat WHERE id_obat = ?";
         try{
             pst = con.prepareStatement(query);
-            pst.setString(1, nik);
+            pst.setString(1, id);
             rs = pst.executeQuery();
             if(rs.next()){
                 o.setId_obat(rs.getString("id_obat"));
@@ -132,14 +132,14 @@ public class ObatDAO {
         ObatDAO ad = new ObatDAO();
         System.out.println(ad.getAllObat());
         obat d = new obat();
-        d.setId_obat("OU001");
-        d.setNama_obat("Paracetamol");   
-        d.setSatuan("butir");        
-        d.setStok(250);      
-        d.setHarga_jual(10000);
-        d.setNo_faktur("013001");
-        d.setId_user("US001");
-        ad.insert(d, "tambah");
+//        d.setId_obat("OU001");
+//        d.setNama_obat("Paracetamol");   
+//        d.setSatuan("butir");        
+//        d.setStok(250);      
+//        d.setHarga_jual(10000);
+//        d.setNo_faktur("013001");
+//        d.setId_user("US001");
+//        ad.insert(d, "tambah");
 //        ad.insert(d, "edit");
 //        ad.delete("OU001");
     }

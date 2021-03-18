@@ -6,6 +6,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import dao.ResepDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,15 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.DokterDAO;
-import model.dokter;
+import model.resep;
 
 /**
  *
  * @author atha
  */
-@WebServlet(name = "DokterCTR", urlPatterns = {"/DokterCTR"})
-public class DokterCTR extends HttpServlet {
+@WebServlet(name = "ResepCTR", urlPatterns = {"/ResepCTR"})
+public class ResepCTR extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,65 +39,51 @@ public class DokterCTR extends HttpServlet {
         
         String page = request.getParameter("page");
         PrintWriter out = response.getWriter();
-        DokterDAO ad = new DokterDAO();
+        ResepDAO ad = new ResepDAO();
         Gson gson = new Gson();
         
         if(page == null){
-            List<dokter> lk = ad.getAllDokter();
+            List<resep> lk = ad.getAllResep();
             String jsonDokter = gson.toJson(lk);
             out.println(jsonDokter);
         } 
         else if(page.equals("tambah")){
-            String id = request.getParameter("id_dokter");
-            if(ad.getRecordById(id).getId_dokter() != null){
+            String id = request.getParameter("id_resep");
+            if(ad.getRecordById(id).getId_resep() != null){
                 response.setContentType("text/html;charset=UTF-8");
-                out.print("Id Dokter : " + id + " - " + ad.getRecordById(id).getNama_dokter() + " sudah terpakai !");
+                out.print("Id Resep : " + id + " sudah terpakai !");
             } else{
-                dokter a = new dokter();
-                a.setId_dokter(request.getParameter("id_dokter"));
-                a.setNama_dokter(request.getParameter("nama_dokter"));
-                a.setTgl_lahir(request.getParameter("tgl_lahir"));
-                a.setId_poli(request.getParameter("id_poli"));
-                a.setJenis_kelamin(request.getParameter("jenis_kelamin"));
-                a.setAlamat(request.getParameter("alamat"));
-                a.setNo_hp(request.getParameter("no_hp"));
-                a.setNpwp(request.getParameter("npwp"));
-                a.setNo_ktp(request.getParameter("no_ktp"));
-                a.setEmail(request.getParameter("email"));
-                a.setPassword(request.getParameter("password"));
-                a.setWaktu(request.getParameter("waktu"));
-                a.setId_user(request.getParameter("id_user"));
-                ad.insert(a, page);
+                resep r = new resep();
+                r.setId_resep(request.getParameter("id_resep"));
+                r.setId_obat(request.getParameter("id_obat"));
+                r.setJumlah(Integer.parseInt(request.getParameter("jumlah")));
+                r.setKeterangan(request.getParameter("keterangan"));
+                r.setWaktu(request.getParameter("waktu"));
+                r.setId_user(request.getParameter("id_user"));
+                ad.insert(r, page);
                 response.setContentType("text/html;charset=UTF-8");
                 out.print("Data berhasil disimpan");
             }
         }
         else if(page.equals("tampil")){
-            String jsonDokter = gson.toJson(ad.getRecordById(request.getParameter("id_dokter")));
+            String jsonDokter = gson.toJson(ad.getRecordById(request.getParameter("id_resep")));
             response.setContentType("application/json");
             out.println(jsonDokter);
         }
         else if(page.equals("edit")){
-            dokter a = new dokter();
-            a.setId_dokter(request.getParameter("id_dokter"));
-            a.setNama_dokter(request.getParameter("nama_dokter"));
-            a.setTgl_lahir(request.getParameter("tgl_lahir"));
-            a.setId_poli(request.getParameter("id_poli"));
-            a.setJenis_kelamin(request.getParameter("jenis_kelamin"));
-            a.setAlamat(request.getParameter("alamat"));
-            a.setNo_hp(request.getParameter("no_hp"));
-            a.setNpwp(request.getParameter("npwp"));
-            a.setNo_ktp(request.getParameter("no_ktp"));
-            a.setEmail(request.getParameter("email"));
-            a.setPassword(request.getParameter("password"));
-            a.setWaktu(request.getParameter("waktu"));
-            a.setId_user(request.getParameter("id_user"));
-            ad.insert(a, page);
+            resep r = new resep();
+            r.setId_resep(request.getParameter("id_resep"));
+            r.setId_obat(request.getParameter("id_obat"));
+            r.setJumlah(Integer.parseInt(request.getParameter("jumlah")));
+            r.setKeterangan(request.getParameter("keterangan"));
+            r.setWaktu(request.getParameter("waktu"));
+            r.setId_user(request.getParameter("id_user"));
+            ad.insert(r, page);
             response.setContentType("text/html;charset=UTF-8");
             out.print("Data berhasil disimpan");
         }
         else if(page.equals("hapus")){
-            ad.delete(request.getParameter("id_dokter"));
+            ad.delete(request.getParameter("id_resep"));
             response.setContentType("text/html;charset=UTF-8");
             out.print("Data berhasil dihapus");
         }

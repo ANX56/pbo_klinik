@@ -11,7 +11,15 @@ package model;
  */
 public class kamar {
     private int kapasitas;
-    private String nama_kamar, deskirpsi, terisi, status, id_kamar, no_kamar;
+    private String nama_kamar, deskirpsi, terisi, status, id_kamar, no_kamar, kelas;
+
+    public String getKelas() {
+        return kelas;
+    }
+
+    public void setKelas(String kelas) {
+        this.kelas = kelas;
+    }
 
     public int getKapasitas() {
         return kapasitas;

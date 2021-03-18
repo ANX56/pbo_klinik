@@ -10,7 +10,32 @@ package model;
  * @author atha
  */
 public class bayarlayanan {
-    private String id_bayar_layanan, id_layanan, id_pasien, tgl_layanan, keterangan;
+    private String id_bayar_layanan, id_layanan, id_pasien, tgl_daftar, jenis_pembayaran, status, waktu;
+    private double harga;
+
+    public String getJenis_pembayaran() {
+        return jenis_pembayaran;
+    }
+
+    public void setJenis_pembayaran(String jenis_pembayaran) {
+        this.jenis_pembayaran = jenis_pembayaran;
+    }
+
+    public String getWaktu() {
+        return waktu;
+    }
+
+    public void setWaktu(String waktu) {
+        this.waktu = waktu;
+    }
+
+    public double getHarga() {
+        return harga;
+    }
+
+    public void setHarga(double harga) {
+        this.harga = harga;
+    }
 
     public String getId_bayar_layanan() {
         return id_bayar_layanan;
@@ -36,19 +61,19 @@ public class bayarlayanan {
         this.id_pasien = id_pasien;
     }
 
-    public String getTgl_layanan() {
-        return tgl_layanan;
+    public String getTgl_daftar() {
+        return tgl_daftar;
     }
 
-    public void setTgl_layanan(String tgl_layanan) {
-        this.tgl_layanan = tgl_layanan;
+    public void setTgl_daftar(String tgl_daftar) {
+        this.tgl_daftar = tgl_daftar;
     }
 
-    public String getKeterangan() {
-        return keterangan;
+    public String getStatus() {
+        return status;
     }
 
-    public void setKeterangan(String keterangan) {
-        this.keterangan = keterangan;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

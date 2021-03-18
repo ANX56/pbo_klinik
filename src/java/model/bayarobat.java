@@ -10,8 +10,9 @@ package model;
  * @author atha
  */
 public class bayarobat {
-    private String id_bayar_obat, id_obat, id_pasien, id_resep, jenis_pembayaran, waktu, id_user;
+    private String id_bayar_obat, id_obat, id_pasien, id_resep, jenis_pembayaran, status, waktu;
     private int jumlah;
+    private double harga;
 
     public String getId_bayar_obat() {
         return id_bayar_obat;
@@ -69,11 +70,19 @@ public class bayarobat {
         this.waktu = waktu;
     }
 
-    public String getId_user() {
-        return id_user;
+    public String getStatus() {
+        return status;
     }
 
-    public void setId_user(String id_user) {
-        this.id_user = id_user;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getHarga() {
+        return harga;
+    }
+
+    public void setHarga(double harga) {
+        this.harga = harga;
     }
 }

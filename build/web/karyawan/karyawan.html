@@ -169,7 +169,8 @@
                                         </div>
                                         <div class="form-group mb-2">
                                             <label for="tgl_lahir">Tanggal Lahir</label>
-                                            <input type="date" class="form-control" id="tgl_lahir">
+                                            <input type="text" class="form-control" onBlur="ValidateDOB()" id="tgl_lahir">
+                                            <span class="badge badge-danger" id="lblError"></span>
                                         </div>
                                         <div class="form-group mb-2">
                                             <label for="bidang_pekerjaan">Bidang Pekerjaan</label>                                
@@ -274,4 +275,37 @@
             </div>
         </div>
     </body>
+    <script>
+        function ValidateDOB() {
+            var lblError = document.getElementById("lblError");
+            var dateString = document.getElementById("tgl_lahir").value;
+            var regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
+
+            if (regex.test(dateString)) {
+                var parts = dateString.split("/");
+                var dtDOB = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+                var dtCurrent = new Date();
+                lblError.innerHTML = "Usia minimal 18 tahun.";
+                if (dtCurrent.getFullYear() - dtDOB.getFullYear() < 18) {
+                    return false;
+                }
+
+                if (dtCurrent.getFullYear() - dtDOB.getFullYear() === 18) {
+                    if (dtCurrent.getMonth() < dtDOB.getMonth()) {
+                        return false;
+                    }
+                    if (dtCurrent.getMonth() === dtDOB.getMonth()) {
+                        if (dtCurrent.getDate() < dtDOB.getDate()) {
+                            return false;
+                        }
+                    }
+                }
+                lblError.innerHTML = "";
+                return true;
+            } else {
+                lblError.innerHTML = "Masukkan tanggal dalam format dd/MM/yyyy.";
+                return false;
+            }
+        }
+    </script>
 </html>

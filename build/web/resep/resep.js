@@ -2,16 +2,16 @@
 
 $(document).ready(function(){
     //deklarasi variabel
-    var id_dokter, nama_dokter, tgl_lahir, id_poli, jenis_kelamin, alamat, no_hp, npwp, no_ktp, email, password, waktu, id_user, page, dateNow, dateLahir;
+    var id_resep, id_obat, jumlah, keterangan, waktu, id_user, page;
     
     //get data dari database ke table
     $.ajax ({
-        url: "/Klinik/DokterCTR",
+        url: "/Klinik/ResepCTR",
         method: "GET",
         dataType: "json",
         success:
             function(data){
-                $("#tabelDokter").dataTable({
+                $("#tabelResep").dataTable({
                     serverside: true,
                     processing: true,
                     data: data,
@@ -19,17 +19,10 @@ $(document).ready(function(){
                     searching: true,
                     paging: true,
                     columns: [
-                        {'data': 'id_dokter', 'name': 'id_dokter', 'type': 'string'},
-                        {'data': 'nama_dokter'},
-                        {'data': 'tgl_lahir'},
-                        {'data': 'id_poli'},
-                        {'data': 'jenis_kelamin'},
-                        {'data': 'alamat'},
-                        {'data': 'no_hp'},
-                        {'data': 'npwp'},
-                        {'data': 'no_ktp'},
-                        {'data': 'email'},
-                        {'data': 'password'},
+                        {'data': 'id_resep', 'name': 'id_resep', 'type': 'string'},
+                        {'data': 'id_obat'},
+                        {'data': 'jumlah'},
+                        {'data': 'keterangan'},
                         {'data': 'waktu'},
                         {'data': 'id_user'},
                         {'data': null, 'className': 'dt-right',
@@ -47,17 +40,10 @@ $(document).ready(function(){
     
     //dapetin value dari setiap input
     function getInputValue(){
-        id_dokter = $("#id_dokter").val();
-        nama_dokter = $("#nama_dokter").val();
-        tgl_lahir = $("#tgl_lahir").val();
-        id_poli = $("#id_poli").val();
-        jenis_kelamin = $("#jenis_kelamin").val();
-        alamat = $("#alamat").val();
-        no_hp = $("#no_hp").val();
-        npwp = $("#npwp").val();
-        no_ktp = $("#no_ktp").val();
-        email = $("#email").val();
-        password = $("#password").val();
+        id_resep = $("#id_resep").val();
+        id_obat = $("#id_obat").val();
+        jumlah = $("#jumlah").val();
+        keterangan = $("#keterangan").val();
         waktu = $("#waktu").val();
         id_user = $("#id_user").val();
     }
@@ -73,97 +59,56 @@ $(document).ready(function(){
     //validasi jika data kosong dan save data ke database 
     $("#btnSave").on('click', function(){
         getInputValue();
-        if(id_dokter === ""){
-            alert("ID Dokter harus diisi");
-            $("#id_dokter").focus();
-        } else if(nama_dokter === ""){
-            alert("Nama Dokter harus diisi");
-            $("#nama_dokter").focus();
-        } else if(id_poli === ""){
-            alert("ID Poli harus diisi");
-            $("#id_poli").focus();
-        } else if(email === ""){
-            alert("Email harus diisi");
-            $("#email").focus();
-        } else if(password === ""){
-            alert("Password harus diisi");
-            $("#password").focus();
+        if(id_resep === ""){
+            alert("ID Resep harus diisi");
+            $("#id_resep").focus();
+        } else if(id_obat === ""){
+            alert("ID Obat harus diisi");
+            $("#id_obat").focus();
+        } else if(jumlah === ""){
+            alert("Jumlah harus diisi");
+            $("#jumlah").focus();
         } else{
-            $.post("/Klinik/DokterCTR",
+            $.post("/Klinik/ResepCTR",
                 {
                     page: page,
-                    id_dokter: id_dokter,
-                    nama_dokter: nama_dokter,
-                    tgl_lahir: tgl_lahir,
-                    id_poli: id_poli,
-                    jenis_kelamin: jenis_kelamin,
-                    alamat: alamat,
-                    no_hp: no_hp,
-                    npwp: npwp,
-                    no_ktp: no_ktp,
-                    email: email,
-                    password: password,
+                    id_resep: id_resep,
+                    id_obat: id_obat,
+                    jumlah: jumlah,
+                    keterangan: keterangan,
                     waktu: waktu,
                     id_user: id_user
                 },
                 function(data, status){
-                    alert(data);
+                    alert(data+" "+status);
                     if(data === "Data berhasil disimpan"){location.reload();}
                 }
             );
         }
     });
-        
-    function formatDate(date) {
-        var d = new Date(date),
-            month = '' + (d.getMonth() + 1),
-            day = '' + d.getDate(),
-            year = d.getFullYear();
-
-        if (month.length < 2) 
-            month = '0' + month;
-        if (day.length < 2) 
-            day = '0' + day;
-
-        return [year, month, day].join('-');
-    }
     
     //edit data
-    $("#tabelDokter tbody").on('click', '#btnEdit', function(){
+    $("#tabelResep tbody").on('click', '#btnEdit', function(){
         $("#myModal").show();
         $("#title1").hide();
         $("#title2").show();
-        $("#id_dokter").prop('disabled', true);
+        $("#id_resep").prop('disabled', true);
         page = "tampil";
         
         //dapetin baris yang di klik
         var baris = $(this).closest('tr');
-        var id_dokter = baris.find("td:eq(0)").text();
-        $.post("/Klinik/DokterCTR",
+        var id_resep = baris.find("td:eq(0)").text();
+        $.post("/Klinik/ResepCTR",
             {
                 page: page,
-                id_dokter: id_dokter
+                id_resep: id_resep
             },
             function(data, status){
-                var jk="";
-                if(data.jenis_kelamin === "Laki-Laki"){
-                    jk="L";
-                } else if(data.jenis_kelamin === "Perempuan"){
-                    jk="P";
-                }
-                //ubah format waktu dari database ke format yang benar (YYYY-MM-ddThh:mm:ss
                 let d = new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
-                $("#id_dokter").val(data.id_dokter);
-                $("#nama_dokter").val(data.nama_dokter);
-                $("#tgl_lahir").val(formatDate(data.tgl_lahir));
-                $("#id_poli").val(data.id_poli);
-                $("#jenis_kelamin").val(jk);
-                $("#alamat").val(data.alamat);
-                $("#no_hp").val(data.no_hp);
-                $("#npwp").val(data.npwp);
-                $("#no_ktp").val(data.no_ktp);
-                $("#email").val(data.email);
-                $("#password").val(data.password);
+                $("#id_resep").val(data.id_resep);
+                $("#id_obat").val(data.id_obat);
+                $("#jumlah").val(data.jumlah);
+                $("#keterangan").val(data.keterangan);
                 $("#waktu").val(d);
                 $("#id_user").val(data.id_user);
             }
@@ -172,21 +117,21 @@ $(document).ready(function(){
     });
     
     //hapus data
-    $("#tabelDokter tbody").on('click', '#btnDelete', function(){
+    $("#tabelResep tbody").on('click', '#btnDelete', function(){
         //dapetin baris yang di click
         var baris = $(this).closest('tr');
-        var id_dokter = baris.find("td:eq(0)").text();
-        var nama_dokter = baris.find("td:eq(1)").text();
+        var id_resep = baris.find("td:eq(0)").text();
+        var id_obat = baris.find("td:eq(1)").text();
         page = "hapus";
         //konfirmasi jika akan dihapus
-        if(confirm("Apakah anda yakin akan menghapus data : '" + id_dokter + " - " + nama_dokter +"' ?")){
-            $.post("/Klinik/DokterCTR",
+        if(confirm("Apakah anda yakin akan menghapus data : '" + id_resep + " - " + id_obat +"' ?")){
+            $.post("/Klinik/ResepCTR",
                 {
                     page: page,
-                    id_dokter: id_dokter
+                    id_resep: id_resep
                 },
                 function(data, status){
-                    alert(data);
+                    alert(data+" "+status);
                     location.reload();
                 }
             );
@@ -206,14 +151,14 @@ $(document).ready(function(){
     });
     
     //buat function untuk menampilkan data poli ke tabelLookupPoli
-    function loadPoli() {
-        loadPoli = 1;
+    function loadObat() {
+        loadObat = 1;
         $.ajax({
-            url: "/Klinik/PoliCTR",
+            url: "/Klinik/ObatCTR",
             method: "GET", 
             dataType: "json",
             success: function(data){
-                $("#tabelLookupPoli").dataTable({
+                $("#tabelLookupObat").dataTable({
                 serverside: true,
                 processing: true,
                 data: data,
@@ -221,11 +166,11 @@ $(document).ready(function(){
                 searching: true,
                 paging: true,
                 columns: [
-                        {'data': 'id_poli', 'name': 'id_poli', 'type': 'string'},
-                        {'data': 'nama_poli'},
+                        {'data': 'id_obat', 'name': 'id_obat', 'type': 'string'},
+                        {'data': 'nama_obat'},
                         {'data': null, 'className': 'dt-right', 'mRender': function(o){
                                 return "<a class='btn btn-warning btn-sm'"
-                                + "id = 'btnInsertPoli'>Insert</a>";
+                                + "id = 'btnInsertObat'>Insert</a>";
                             }
                         }
                     ]
@@ -234,19 +179,18 @@ $(document).ready(function(){
         });
     }
     
-    //jika tombol lookup di klik
-    $("#btn-lookup-poli").click(function() {
-        $("#modalLookupPoli").modal('show');
-        if (loadPoli !== 1) {
-            loadPoli();
+    $("#btn-lookup-obat").click(function() {
+        $("#modalLookupObat").modal('show');
+        if (loadObat !== 1) {
+            loadObat();
         }
-        $("#tabelLookupPoli tbody").on('click', '#btnInsertPoli', function() {
+        $("#tabelLookupObat tbody").on('click', '#btnInsertObat', function() {
             let baris = $(this).closest('tr');
-            let id_poli = baris.find("td:eq(0)").text();
+            let keterangan = baris.find("td:eq(0)").text();
             let nama_poli = baris.find("td:eq(1)").text();
-            $("#id_poli").val(id_poli);
-            $("#nama_poli").val(nama_poli);
-            $("#modalLookupPoli").modal("hide");
+            $("#id_obat").val(keterangan);
+            $("#nama_obat").val(nama_poli);
+            $("#modalLookupObat").modal("hide");
         });
     });
     
@@ -298,12 +242,12 @@ $(document).ready(function(){
     
     //clear input 
     function clearForm() {
-        $("#id_dokter").val("");
-        $("#id_dokter").prop('disabled', false);
-        $("#nama_dokter").val("");
-        $("#tgl_lahir").val("");
+        $("#id_resep").val("");
+        $("#id_resep").prop('disabled', false);
+        $("#id_obat").val("");
+        $("#jumlah").val("");
         $("#alamat").val("");
-        $("#id_poli").val("");
+        $("#keterangan").val("");
         $("#jenis_kelamin").val("");
         $("#no_hp").val("");
         $("#npwp").val("");

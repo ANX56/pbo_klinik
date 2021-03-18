@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Side Bar -->
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <h1><a href="index.html" class="logo">Klinik</a></h1>
+            <ul class="list-unstyled components mb-5">
+                <li>
+                    <a href="index.html"><span class="fa fa-home mr-3"></span> Home</a>
+                </li>
+                <li class="active">
+                    <a href="registrasi.html"><span class="fa fa-sticky-note mr-3"></span> Pendaftaran</a>
+                </li>
+                <li>
+                    <a href="pasien.html"><span class="fa fa-user mr-3"></span> Data Pasien</a>
+                </li>
+                <li>
+                    <a href="rm.html"><span class="fa fa-sticky-note mr-3"></span> Rekam Medis</a>
+                </li>
+                <li>
+                    <a href="user.html"><span class="fa fa-user mr-3"></span> Data User</a>
+                </li>
+                <li>
+                    <a href="dokter.html"><span class="fa fa-user mr-3"></span> Data Dokter</a>
+                </li>
+                <li>
+                    <a href="karyawan.html"><span class="fa fa-user mr-3"></span> Data Karyawan</a>
+                </li>
+                <li>
+                    <a href="supplier.html"><span class="fa fa-user mr-3"></span> Data Supplier</a>
+                </li>
+                <li>
+                    <a href="kamar.html"><span class="fa fa-user mr-3"></span> Data Kamar</a>
+                </li>
+                <li>
+                    <a href="pembayaran.html"><span class="fa fa-sticky-note mr-3"></span> Pembayaran</a>
+                </li>
+                <li>
+                    <a href="login.html"><span class="fa fa-paper-plane mr-3"></span> Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            <!-- Top Bar -->
+            <div>
+                <nav class="navbar navbar-success bg-primary">
+                    <span class="navbar-brand mb-0 h1 text-light">Pendaftaran Pasien</span>
+                </nav>
+            </div>
+            <!-- Form -->
+            <div class="jumbotron bg-transparent table-responsive">
+                <form action="">
+                    <!-- No. Identitas -->
+                    <div class="mb-2">
+                        <input class="form-control" type="number" placeholder="No. Identitas">
+                    </div>
+                    <!-- Nama -->
+                    <div class="mb-2">
+                        <input class="form-control" type="text" placeholder="Nama">
+                    </div>
+                    <!-- Gender -->
+                    <div class="mb-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="radioGender" id="radioGender1">
+                            <label class="form-check-label" for="radioGender1">Laki-Laki</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="radioGender" id="radioGender2">
+                            <label class="form-check-label" for="radioGender2">Perempuan</label>
+                        </div>
+                    </div>
+                    <!-- Agama -->
+                    <div class="mb-2">
+                        <input class="form-control" type="text" placeholder="Agama">
+                    </div>
+                    <!-- Lahir -->
+                    <div class="input-group mb-2">
+                        <div class="input-group-append mr-auto" style="width: 49%;">
+                            <input class="form-control" type="text" placeholder="Tempat Lahir">
+                        </div>
+                        
+                        <div class="input-group-prepend" style="width: 49%;">
+                            <input class="form-control text-center" type="date">
+                        </div>
+                    </div>
+                    <!-- Alamat -->
+                    <div class="mb-2">
+                        <textarea class="form-control" name="" id="" rows="2" placeholder="Alamat"></textarea>
+                    </div>
+                    <!-- No Telepon -->
+                    <div class="mb-2">
+                        <input class="form-control" type="number" placeholder="No Telepon">
+                    </div>
+                    <!-- Status -->
+                    <div class="mb-2">
+                        <input class="form-control" type="text" placeholder="Status">
+                    </div>
+                    <!-- Pekerjaan -->
+                    <div class="mb-4">
+                        <input class="form-control" type="text" placeholder="Pekerjaan">
+                    </div>
+                    <!-- Submit -->
+                    <div class="text-right">
+                        <button class="btn btn-primary">Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

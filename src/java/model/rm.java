@@ -10,7 +10,16 @@ package model;
  * @author atha
  */
 public class rm {
-    private String id_pasien, tgl_daftar, id_poli, id_dokter, berat, tinggi, tensi, diagnosa, id_resep, waktu;
+    private String nomor_rm, id_pasien, tgl_daftar, id_poli, id_dokter, tensi, diagnosa, id_resep, waktu;
+    private int berat, tinggi;
+
+    public String getNomor_rm() {
+        return nomor_rm;
+    }
+
+    public void setNomor_rm(String nomor_rm) {
+        this.nomor_rm = nomor_rm;
+    }
 
     public String getId_pasien() {
         return id_pasien;
@@ -44,19 +53,19 @@ public class rm {
         this.id_dokter = id_dokter;
     }
 
-    public String getBerat() {
+    public int getBerat() {
         return berat;
     }
 
-    public void setBerat(String berat) {
+    public void setBerat(int berat) {
         this.berat = berat;
     }
 
-    public String getTinggi() {
+    public int getTinggi() {
         return tinggi;
     }
 
-    public void setTinggi(String tinggi) {
+    public void setTinggi(int tinggi) {
         this.tinggi = tinggi;
     }
 
