@@ -2,16 +2,33 @@
 
 $(document).ready(function(){
     //deklarasi variabel
-    var id_supplier, nama_supplier, alamat, no_hp, email, waktu, id_user, id_user, page;
+    var id_supplier, nama_dokter, alamat, no_hp, email, password, waktu, id_user, page;
+    
+    //dapetin value dari setiap input
+    function getInputValue(){
+        id_supplier = $("#id_supplier").val();
+        nama_dokter = $("#nama_dokter").val();
+        tgl_lahir = $("#tgl_lahir").val();
+        id_poli = $("#id_poli").val();
+        jenis_kelamin = $("#jenis_kelamin").val();
+        alamat = $("#alamat").val();
+        no_hp = $("#no_hp").val();
+        npwp = $("#npwp").val();
+        no_ktp = $("#no_ktp").val();
+        email = $("#email").val();
+        password = $("#password").val();
+        waktu = $("#waktu").val();
+        id_user = $("#id_user").val();
+    }
     
     //get data dari database ke table
     $.ajax ({
-        url: "/controller/SuplierCtr",
+        url: "/Klinik/SupplierCTR",
         method: "GET",
         dataType: "json",
         success:
             function(data){
-                $("#tabelUser").dataTable({
+                $("#tabelSupplier").dataTable({
                     serverside: true,
                     processing: true,
                     data: data,
@@ -24,9 +41,9 @@ $(document).ready(function(){
                         {'data': 'alamat'},
                         {'data': 'no_hp'},
                         {'data': 'email'},
+                        {'data': 'password'},
                         {'data': 'waktu'},
                         {'data': 'id_user'},
-                        
                         {'data': null, 'className': 'dt-right',
                             'mRender' : function(o){
                                 return "<a class= 'btn btn-outline-success btn-sm'" 
@@ -40,19 +57,6 @@ $(document).ready(function(){
             }
     });
     
-    //dapetin value dari setiap input
-    function getInputValue(){
-        id_supplier = $("#id_supplier").val();
-        nama_supplier = $("#nama_supplier").val();
-        alamat = $("#alamat").val();
-        no_hp = $("#no_hp").val();
-        email = $("#email").val();
-        waktu = $("#waktu").val();
-        id_user = $("#id_user").val();
-
-        
-    }
-    
     //munculin modal ketika tombol tambah di klik
     $("#btnAdd").click(function(){
         $("#myModal").show();
@@ -65,44 +69,51 @@ $(document).ready(function(){
     $("#btnSave").on('click', function(){
         getInputValue();
         if(id_supplier === ""){
-            alert("ID sup harus diisi");
+            alert("ID Supplier harus diisi");
             $("#id_supplier").focus();
-        } else if(nama_supplier=== ""){
-            alert("nama supplier harus diisi");
+        } else if(nama_dokter === ""){
+            alert("Nama Dokter harus diisi");
             $("#nama_supplier").focus();
-        } else if(alamat=== ""){
-            alert("alamat harus diisi");
-            $("#alamat").focus();
-        } else if(no_hp === ""){
-            alert("no hp harus diisi");
-            $("#no_hp").focus();
-        }  else if(email === ""){
-            alert("emial supplier harus diisi");
+        } else if(email === ""){
+            alert("Email harus diisi");
             $("#email").focus();
-        }else if(waktu === ""){
-            alert("waktu harus diisi");
-            $("#waktu").focus();
-        }else{
-            $.post("/controller/SuplierCtr",
+        } else if(password === ""){
+            alert("Password harus diisi");
+            $("#password").focus();
+        } else{
+            $.post("/Klinik/SupplierCTR",
                 {
                     page: page,
                     id_supplier: id_supplier,
-                    nama_supplier: nama_supplier,
+                    nama_dokter: nama_dokter,
                     alamat: alamat,
                     no_hp: no_hp,
                     email: email,
+                    password: password,
                     waktu: waktu,
-                    id_user: id_user,
-     
-                    
+                    id_user: id_user
                 },
                 function(data, status){
-                    alert(data+" "+status);
+                    alert(data);
                     if(data === "Data berhasil disimpan"){location.reload();}
                 }
             );
         }
     });
+        
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
     
     //edit data
     $("#tabelSupplier tbody").on('click', '#btnEdit', function(){
@@ -114,120 +125,59 @@ $(document).ready(function(){
         
         //dapetin baris yang di klik
         var baris = $(this).closest('tr');
-        var id_kamar = baris.find("td:eq(0)").text();
-        $.post("/controller/SuplierCtr",
+        var id_supplier = baris.find("td:eq(0)").text();
+        $.post("/Klinik/SupplierCTR",
             {
                 page: page,
                 id_supplier: id_supplier
             },
             function(data, status){
-                //karena data dari database itu sudah diubah di DAO, 
-                //dimana jika L menjadi Laki-Laki, dan P menjadi Perempuan,
-                //karena value di dropdown itu pakai L dan P, 
-                //supaya ketika di tampilkan ke database gak perlu ubah lagi
-                
                 //ubah format waktu dari database ke format yang benar (YYYY-MM-ddThh:mm:ss
-                let d = new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+                let d = new Date(data.waktu.toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
                 $("#id_supplier").val(data.id_supplier);
                 $("#nama_supplier").val(data.nama_supplier);
                 $("#alamat").val(data.alamat);
                 $("#no_hp").val(data.no_hp);
                 $("#email").val(data.email);
-                $("#waktu").val(data.waktu);
+                $("#password").val(data.password);
+                $("#waktu").val(d);
                 $("#id_user").val(data.id_user);
-
-              
             }
         );
         page = "edit";
     });
     
     //hapus data
-    $("#tabelUser tbody").on('click', '#btnDelete', function(){
+    $("#tabelSupplier tbody").on('click', '#btnDelete', function(){
         //dapetin baris yang di click
         var baris = $(this).closest('tr');
-        var id_kamar = baris.find("td:eq(0)").text();
-        var nama_kamar = baris.find("td:eq(1)").text();
+        var id_supplier = baris.find("td:eq(0)").text();
+        var nama_dokter = baris.find("td:eq(1)").text();
         page = "hapus";
         //konfirmasi jika akan dihapus
-        if(confirm("Apakah anda yakin akan menghapus data : '" + id_kamar + " - " + nama_kamar +"' ?")){
-            $.post("/controller/SuplierCtr",
+        if(confirm("Apakah anda yakin akan menghapus data : '" + id_supplier + " - " + nama_dokter +"' ?")){
+            $.post("/Klinik/SupplierCTR",
                 {
                     page: page,
                     id_supplier: id_supplier
                 },
                 function(data, status){
-                    alert(data+" "+status);
+                    alert(data);
                     location.reload();
                 }
             );
         }
     });
     
-    //close modal lewat tombol x
-    $("#btnClose").on('click', function(){
-       $("#myModal").hide(); 
-       clearForm();
-    });
-    
-    //close modal lewat tombol cancel
-    $("#btnCancel").on('click', function(){
-       $("#myModal").hide(); 
-       clearForm();
-    });
-    
-    //buat function untuk menampilkan data poli ke tabelLookupPoli
-//    function loadPoli() {
-//        loadPoli = 1;
-//        $.ajax({
-//            url: "/Klinik/PoliCTR",
-//            method: "GET", 
-//            dataType: "json",
-//            success: function(data){
-//                $("#tabelLookupPoli").dataTable({
-//                serverside: true,
-//                processing: true,
-//                data: data,
-//                sort: true,
-//                searching: true,
-//                paging: true,
-//                columns: [
-//                        {'data': 'id_poli', 'name': 'id_poli', 'type': 'string'},
-//                        {'data': 'nama_poli'},
-//                        {'data': null, 'className': 'dt-right', 'mRender': function(o){
-//                                return "<a class='btn btn-warning btn-sm'"
-//                                + "id = 'btnInsertPoli'>Insert</a>";
-//                            }
-//                        }
-//                    ]
-//                });
-//            }
-//        });
-//    }
-    
-    //jika tombol lookup di klik
-//    $("#btn-lookup-poli").click(function() {
-//        $("#modalLookupPoli").modal('show');
-//        if (loadPoli !== 1) {
-//            loadPoli();
-//        }
-//        $("#tabelLookupPoli tbody").on('click', '#btnInsertPoli', function() {
-//            let baris = $(this).closest('tr');
-//            let id_poli = baris.find("td:eq(0)").text();
-//            $("#id_poli").val(id_poli);
-//            $("#modalLookupPoli").modal("hide");
-//        });
-//    });
-    
     //buat function untuk menampilkan data poli ke tabelLookupUser
     function loadUser() {
-       loadUser = 1;
-       $.ajax({
-            url: "/controller/UserCtr",
+        loadUser = 1;
+        $.ajax({
+            url: "/Klinik/UserCTR",
             method: "GET", 
             dataType: "json",
             success: function(data){
-                $("#tabelLookupSuplier").dataTable({
+                $("#tabelLookupUser").dataTable({
                     serverside: true,
                     processing: true,
                     data: data,
@@ -251,25 +201,34 @@ $(document).ready(function(){
     
     //jika tombol lookup di klik
     $("#btn-lookup-user").click(function() {
-        $("#modalLookupSupplier").modal('show');
+        $("#modalLookupUser").modal('show');
         if (loadUser !== 1) {
             loadUser();
         }
-        $("#tabelLookupSupplier tbody").on('click', '#btnInsertSupplier', function() {
+        $("#tabelLookupUser tbody").on('click', '#btnInsertUser', function() {
             let baris = $(this).closest('tr');
             let id = baris.find("td:eq(0)").text();
+            let nama = baris.find("td:eq(1)").text();
             $("#id_user").val(id);
-            $("#modalLookupSupplier").modal("hide");
+            $("#nama_user").val(nama);
+            $("#modalLookupUser").modal("hide");
         });
     });
     
     //clear input 
     function clearForm() {
         $("#id_supplier").val("");
-        $("#nama_supplier").prop('disabled', false);
+        $("#id_supplier").prop('disabled', false);
+        $("#nama_dokter").val("");
+        $("#tgl_lahir").val("");
         $("#alamat").val("");
+        $("#id_poli").val("");
+        $("#jenis_kelamin").val("");
         $("#no_hp").val("");
+        $("#npwp").val("");
+        $("#no_ktp").val("");
         $("#email").val("");
+        $("#password").val("");
         $("#waktu").val("");
         $("#id_user").val("");
     }
@@ -288,10 +247,4 @@ $(document).ready(function(){
           $('#sidebar').toggleClass('active');
       });
     })(jQuery);
-
 });
-
-
-
-
-

@@ -10,14 +10,30 @@ package model;
  * @author hadit
  */
 public class supplier {
-    private String id_sup,nama_sup, email, alamat, notelp, id_user;
+    private String id_supplier, nama_supplier, email, alamat, no_hp, password, waktu, id_user;
 
-    public String getId_user() {
-        return id_user;
+    public String getWaktu() {
+        return waktu;
     }
 
-    public void setId_user(String id_user) {
-        this.id_user = id_user;
+    public void setWaktu(String waktu) {
+        this.waktu = waktu;
+    }
+
+    public String getId_supplier() {
+        return id_supplier;
+    }
+
+    public void setId_supplier(String id_supplier) {
+        this.id_supplier = id_supplier;
+    }
+
+    public String getNama_supplier() {
+        return nama_supplier;
+    }
+
+    public void setNama_supplier(String nama_supplier) {
+        this.nama_supplier = nama_supplier;
     }
 
     public String getEmail() {
@@ -28,14 +44,6 @@ public class supplier {
         this.email = email;
     }
 
-    public String getNama_sup() {
-        return nama_sup;
-    }
-
-    public void setNama_sup(String nama_sup) {
-        this.nama_sup = nama_sup;
-    }
-
     public String getAlamat() {
         return alamat;
     }
@@ -44,20 +52,27 @@ public class supplier {
         this.alamat = alamat;
     }
 
-    public String getId_sup() {
-        return id_sup;
+    public String getNo_hp() {
+        return no_hp;
     }
 
-    public void setId_sup(String id_sup) {
-        this.id_sup = id_sup;
+    public void setNo_hp(String no_hp) {
+        this.no_hp = no_hp;
     }
 
-    public String getNotelp() {
-        return notelp;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNotelp(String notelp) {
-        this.notelp = notelp;
+    public void setPassword(String password) {
+        this.password = password;
     }
-    
+
+    public String getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
+    }
 }

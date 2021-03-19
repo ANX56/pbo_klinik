@@ -35,13 +35,15 @@ public class SupplierDAO {
             rs= pst.executeQuery();
             while(rs.next()){
                 supplier s = new supplier();
-                s.setId_sup(rs.getString("id_supplier"));
-                s.setNama_sup(rs.getString("nama_supplier"));
+                s.setId_supplier(rs.getString("id_supplier"));
+                s.setNama_supplier(rs.getString("nama_supplier"));
                 s.setAlamat(rs.getString("alamat"));
-                s.setNotelp(rs.getString("no_hp"));
+                s.setNo_hp(rs.getString("no_hp"));
                 s.setEmail(rs.getString("email"));
+                s.setPassword(rs.getString("password"));
+                s.setWaktu(rs.getString("waktu"));
                 s.setId_user(rs.getString("id_user"));
-            
+                ls.add(s);            
             }
         }
         catch(SQLException e){
@@ -50,7 +52,7 @@ public class SupplierDAO {
         return ls;
     }
     
-    public supplier getRecordByIdSup(String no){
+    public supplier getRecordById(String no){
         supplier u = new supplier();
         String qusup="SELECT * FROM supplier WHERE id_suplier=?";
         try{
@@ -58,11 +60,13 @@ public class SupplierDAO {
         pst.setString(1, no);
         rs = pst.executeQuery();
             if (rs.next()) {
-                u.setId_sup(rs.getString("id_suplier"));
-                u.setNama_sup(rs.getString("nama_supplier"));
+                u.setId_supplier(rs.getString("id_suplier"));
+                u.setNama_supplier(rs.getString("nama_supplier"));
                 u.setAlamat(rs.getString("alamat"));
-                u.setNotelp(rs.getString("no_hp"));
+                u.setNo_hp(rs.getString("no_hp"));
                 u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
+                u.setWaktu(rs.getString("waktu"));
                 u.setId_user(rs.getString("id_user"));
             }
         }
@@ -76,18 +80,20 @@ public class SupplierDAO {
         try{
             String query = "";
             if(page.equals("edit")){
-                query = "UPDATE supplier SET nama_supplier=?, alamat=?, no_hp=?, email=?, id_user=? WHERE id_supplier=?";
+                query = "UPDATE supplier SET nama_supplier=?, alamat=?, no_hp=?, email=?, password=?, waktu, id_user=? WHERE id_supplier=?";
             }
             else if(page.equals("tambah")){
-                query = "INSERT INTO supplier(nama_supplier, alamat, no_hp, email, id_user, id_supplier) VALUES (?,?,?,?,?,?)";
+                query = "INSERT INTO supplier(nama_supplier, alamat, no_hp, email, password, waktu, id_user, id_supplier) VALUES (?,?,?,?,?,?,?,?)";
             }
             pst = con.prepareStatement(query);
-            pst.setString(1, a.getNama_sup());
+            pst.setString(1, a.getNama_supplier());
             pst.setString(2, a.getAlamat());
-            pst.setString(3, a.getNotelp()); 
-            pst.setString(4, a.getEmail());  
-            pst.setString(5, a.getId_user());           
-            pst.setString(6, a.getId_sup());
+            pst.setString(3, a.getNo_hp()); 
+            pst.setString(4, a.getEmail());
+            pst.setString(5, a.getPassword());
+            pst.setString(6, a.getWaktu());
+            pst.setString(7, a.getId_user());
+            pst.setString(8, a.getId_supplier());
             pst.executeUpdate();
             System.out.println("insert or update success");
         }
